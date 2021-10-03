@@ -16,11 +16,11 @@ import com.k19.models.employeeModel;
 // servlet mapping
 @WebServlet(name = "registerConfirmServlet", urlPatterns = { "/sign-up/confirm" })
 
-public class employeeServlet extends HttpServlet {
+public class registerConfirmServlet extends HttpServlet {
     private employeeDAO edao;
 
     // init edao when Servlet init
-    public employeeServlet() {
+    public registerConfirmServlet() {
         this.edao = new employeeDAO();
     }
 

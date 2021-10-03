@@ -24,8 +24,19 @@
     <welcome-file>demo.jsp</welcome-file>
     <welcome-file>sample.jsp</welcome-file>
   </welcome-file-list>
-  <!--  -->
-  <jsp-config>
+
+  <!-- 404 Page -->
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/views/error/error404.html</location>
+  </error-page>
+
+  <!-- Error Page -->
+  <!-- <error-page>
+    <location>/general-error.html</location>
+  </error-page> -->
+
+  <!-- <jsp-config>
     <taglib>
       <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
       <taglib-location>/WEB-INF/lib/c.tld</taglib-location>
@@ -34,5 +45,5 @@
       <taglib-uri>http://java.sun.com/jsp/jstl/functions</taglib-uri>
       <taglib-location>/WEB-INF/lib/fn.tld</taglib-location>
     </taglib>
-  </jsp-config>
+  </jsp-config> -->
 </web-app>

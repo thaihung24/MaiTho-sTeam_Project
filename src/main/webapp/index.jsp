@@ -12,9 +12,9 @@ import="java.sql.*"
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/grid.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/main.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/firstpage.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/layout/grid.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/layout/main.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/oneshot/firstpage.css">
     <%-- Font --%>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
