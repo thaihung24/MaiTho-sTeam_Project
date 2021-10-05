@@ -1,6 +1,7 @@
 package com.k19.controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -10,18 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-import com.k19.DAO.employeeDAO;
-import com.k19.models.employeeModel;
+import com.k19.models.member;
+import com.k19.DAO.memberDAO;
 
 // servlet mapping
 @WebServlet(name = "registerConfirmServlet", urlPatterns = { "/sign-up/confirm" })
 
-public class registerConfirmServlet extends HttpServlet {
-    private employeeDAO edao;
+public class register extends HttpServlet {
+    private memberDAO mdao;
 
     // init edao when Servlet init
-    public registerConfirmServlet() {
-        this.edao = new employeeDAO();
+    public register() {
+        this.mdao = new memberDAO();
     }
 
     // [GET] /sign-up/confirm
@@ -42,26 +43,32 @@ public class registerConfirmServlet extends HttpServlet {
             // get value
             final String firstName = req.getParameter("firstName");
             final String lastName = req.getParameter("lastName");
+            final String fullName = firstName + " " + lastName;
             final String username = req.getParameter("username");
             final String password = req.getParameter("password");
-            final String address = req.getParameter("address");
+            final String email = req.getParameter("email");
             final String contact = req.getParameter("contact");
             final String gentle = req.getParameter("gentle");
-            final employeeModel employee = new employeeModel();
-            employee.setFirstName(firstName);
-            employee.setLastName(lastName);
-            employee.setUsername(username);
-            employee.setPassword(password);
-            employee.setAddress(address);
-            employee.setContact(contact);
-            employee.setGentle(gentle);
+            final member member = new member();
+            member.setFirstName(firstName);
+            member.setLastName(lastName);
+            member.setFullName(fullName);
+            member.setUsername(username);
+            member.setPassword(password);
+            member.setEmail(email);
+            member.setContact(contact);
+            member.setGentle(gentle);
+
+            // Halo Data
             try {// try to insert value
-                this.edao.registerEmployee(employee);
-                req.setAttribute("user", (employeeModel) employee);
+                this.mdao.registerMember(member);
+                req.setAttribute("user", (member) member);
                 url = "/thanks.jsp";
                 this.getServletContext().getRequestDispatcher("/WEB-INF/views" + url).forward((ServletRequest) req,
                         (ServletResponse) resp);
             } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else if (action.equals("cancel")) {

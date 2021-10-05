@@ -66,6 +66,12 @@
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.23</version>
+    </dependency>
     <!-- taglibs-standard-spec-*.jar -->
     <!-- http://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-spec -->
     <dependency>
@@ -75,6 +81,13 @@
     </dependency>
 
     <!-- taglibs-standard-impl-*.jar -->
+    <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+<dependency>
+    <groupId>com.auth0</groupId>
+    <artifactId>java-jwt</artifactId>
+    <version>3.10.3</version>
+</dependency>
+
     <!-- http://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-impl -->
     <dependency>
       <groupId>org.apache.taglibs</groupId>

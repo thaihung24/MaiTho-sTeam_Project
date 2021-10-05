@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-md-2">
                             <label class="my-1 mr-2" for="gentle">Gentle</label>
-                    <select name="gentle" class="custom-select my-1 mr-sm-2" id="gentle">
+                            <select name="gentle" class="custom-select my-1 mr-sm-2" id="gentle">
                             <option selected>Choose...</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -54,8 +54,8 @@
                     </div>
                     <div class="form-row mt-4 flex-column align-center">
                         <div class="col-md-8">
-                            <label for="address">Address</label>
-                            <input id="address" name="address" type="text" class="form-control" placeholder="Your Address">
+                            <label for="address">Email</label>
+                            <input id="address" name="email" type="email" class="form-control" placeholder="Your Email">
                         </div>
                         <div class="col-md-8">
                             <label for="contact">Contact</label>

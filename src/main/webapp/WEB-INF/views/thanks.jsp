@@ -21,10 +21,9 @@
                     <th scope="col">First name</th>
                     <th scope="col">Last name</th>
                     <th scope="col">User name</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Contact</th>
-                    <th scope="col">gentle</th>
-
+                    <th scope="col">Gentle</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,7 +32,7 @@
                     <td>${user.firstName}</td>
                     <td>${user.lastName}</td>
                     <td>${user.username}</td>
-                    <td>${user.address}</td>
+                    <td>${user.email}</td>
                     <td>${user.contact}</td>
                     <td>${user.gentle}</td>               
                 </tr>

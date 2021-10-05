@@ -20,7 +20,7 @@ import="java.sql.*"
         <body>
             <form action="<%=request.getContextPath()%>/sign-in/confirm" method="post">
                 <div class="imgcontainer">
-                    <img src="https://www.seekpng.com/png/detail/138-1388103_user-login-icon-login.png" alt="Avatar" class="avatar">
+                    <img src="https://lh3.googleusercontent.com/proxy/TkyCKvBiO_7Ng_l_LWVX2rGZ-Tb_CF0chlx6lA9JqRGwY-U9lLjTPDIVG7Mu2Ko14o7w8BYJBfs147PxpiXFDtG4M6AaiEiQGlpEhnt1gZFAye_o8oe5Gg-aSt139kxmHo4_h3UDVA" alt="Avatar" class="avatar">
                 </div>
 
                 <div class="container">
@@ -39,7 +39,7 @@ import="java.sql.*"
                 </div>
 
                 <!-- Maybe i will do it next time -->
-                <div class="container" style="background-color:#f1f1f1">
+                <div style="background-color: #F2E1B8;" class="container" style="background-color:#f1f1f1">
                     <button type="button" class="cancelbtn">Cancel</button>
                     <span class="psw">Forgot <a href="#">password?</a></span>
                 </div>
