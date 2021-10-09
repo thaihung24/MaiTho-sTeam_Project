@@ -15,7 +15,7 @@ import com.k19.models.member;
 import com.k19.DAO.memberDAO;
 
 // servlet mapping
-@WebServlet(name = "registerConfirmServlet", urlPatterns = { "/sign-up/confirm" })
+@WebServlet(name = "registerConfirmServlet", urlPatterns = { "/member/sign-up/confirm" })
 
 public class register extends HttpServlet {
     private memberDAO mdao;

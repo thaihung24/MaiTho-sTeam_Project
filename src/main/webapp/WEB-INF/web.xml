@@ -11,14 +11,17 @@
     <url-pattern>/sign-up/confirm</url-pattern>
   </servlet-mapping> -->
   <!-- css,js -->
-  <servlet-mapping>
+  <!-- <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.css</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.js</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
+  <session-config>
+    <session-timeout>120</session-timeout>
+  </session-config>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>demo.jsp</welcome-file>
@@ -28,7 +31,7 @@
   <!-- 404 Page -->
   <error-page>
     <error-code>404</error-code>
-    <location>/WEB-INF/views/error/error404.html</location>
+    <location>/WEB-INF/views/error/error404.jsp</location>
   </error-page>
 
   <!-- Error Page -->

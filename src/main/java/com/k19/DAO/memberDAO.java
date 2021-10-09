@@ -15,7 +15,8 @@ public class memberDAO {
     // Sign-up
     public int registerMember(final member member) throws ClassNotFoundException, SQLException {
         // Connection connection = postgresJDBCConnection.getJDBCConnection();
-        final String INSERT_USERS_SQL = "INSERT INTO member(id ,firstName, lastName,fullName, username, password,email,gentle,contact,created_on) VALUES  (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, now());";
+        final String INSERT_USERS_SQL = "INSERT INTO member(id ,firstName, lastName,fullName, username, password,email,gentle,contact,created_on)"
+                + " VALUES  (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, now());";
         int result = 0;
         try (final PreparedStatement ps = connection.prepareStatement(INSERT_USERS_SQL)) {
 

@@ -18,7 +18,19 @@ import="java.sql.*"
 </head>
 
 <body>
-<h1>Halo <%= session.getAttribute("username") %></h1>
+    <c:forEach var="cookies" items="${pageContext.request.cookies}">
+        <c:if test = "${cookies.name == username}">
+            <c:set var = "username" scope = "session" value = "${cookies.value}"/>
+        </c:if>
+        <c:if test = "${cookies.name == sessionID}">
+            <c:set var = "sessionID" scope = "request" value = "${cookies.value}"/>
+        </c:if>
+    </c:forEach>
+<h1>Halo <%= session.getAttribute("username") %> from Session</h1>
+
+<h1>Halo ${username} from Session <br/>
+    Your sessionID is ${sessionID}
+</h1>
 </body>
 
 </html>

@@ -16,7 +16,7 @@ import com.k19.models.member;
 import com.k19.DAO.memberDAO;
 
 // servlet mapping
-@WebServlet(name = "loginConfirmServlet", urlPatterns = { "/sign-in/confirm" })
+@WebServlet(name = "loginConfirmServlet", urlPatterns = { "/member/sign-in/confirm" })
 
 public class login extends HttpServlet {
 
@@ -29,7 +29,21 @@ public class login extends HttpServlet {
     // [GET] /sign-in/confirm
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
             throws ServletException, IOException {
-        this.doPost(req, resp);
+        Cookie[] cs = req.getCookies();
+        String cname = "username";
+        String cvalue = "";
+        for (Cookie c : cs) {
+            if (c.getName().equals(cname)) {
+                cvalue = c.getValue();
+            }
+        }
+        if (cvalue.equals("")) {
+            this.doPost(req, resp);
+        } else {
+            String url = "/ownhome.jsp";
+            getServletContext().getRequestDispatcher("/WEB-INF/views/member" + url).forward((ServletRequest) req,
+                    (ServletResponse) resp);
+        }
     }
 
     // [POST] /sign-in/confirm
@@ -52,10 +66,16 @@ public class login extends HttpServlet {
                 session.setAttribute("username", uname);
                 req.setAttribute("user", (member) member);
                 // create cookies
-                Cookie cookie = new Cookie("username", uname);
-                cookie.setMaxAge(60 * 60 * 24);
-                cookie.setPath("/");
-                resp.addCookie(cookie);
+                Cookie cookiea = new Cookie("username", uname);
+                cookiea.setMaxAge(60 * 60 * 24);
+                cookiea.setPath("/");
+                resp.addCookie(cookiea);
+
+                String sid = session.getId();
+                Cookie cookieb = new Cookie("sessionID", sid);
+                cookieb.setMaxAge(60 * 60 * 24);
+                cookieb.setPath("/");
+                resp.addCookie(cookieb);
 
                 // change it to Home
                 String url = "/ownhome.jsp";
