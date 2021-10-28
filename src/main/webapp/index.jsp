@@ -97,7 +97,7 @@ import="java.sql.*"
                                 alt="avt" srcset=""> -->
                 </div>
                 <div class="member__name">
-                    <!-- <span>Hưng Nguyễn</span> -->
+                
                 </div>
             </div>
 
@@ -196,7 +196,9 @@ import="java.sql.*"
             <div>@SARK</div>
         </div>
     </footer>
-    <input type="hidden" id="JSON" name="JSON" value="${data}">
+    <input type="hidden" class="JSON" name="JSON" value="${data}">
+    <input type="hidden" class="JSON" name="JSON" value="${member.avt}">
+
 
 
 
@@ -290,9 +292,11 @@ import="java.sql.*"
         nickname
     } = data[2];
     getInfo(nickname);
-    const data = document.querySelector("#JSON");
-    console.log(data)
-    console.log(data.value)
+    const dataJSON = document.querySelectorAll(".JSON");
+    console.log(dataJSON[1])
+    console.log(dataJSON[1].value)
+    console.log(dataJSON[0])
+    console.log(dataJSON[0].value)
 
 </script>
 

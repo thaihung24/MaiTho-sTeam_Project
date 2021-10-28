@@ -13,29 +13,40 @@ import com.k19.models.memberJPA;
 import connection.dbUtil;
 
 public class memberJPADAO {
-    private static EntityManagerFactory emf = null;
-    private static EntityManager em = null;
-    private static EntityTransaction trans = null;
 
     public void insertMember(final memberJPA member) {
-
+        EntityManagerFactory emf = null;
+        EntityManager em = null;
+        EntityTransaction trans = null;
         try {
-            emf = dbUtil.getEMF();
+            // emf = dbUtil.getEMF();
+            emf = Persistence.createEntityManagerFactory("k19WebApp");
             em = emf.createEntityManager();
             trans = em.getTransaction();
             trans.begin();
+            System.out.println(emf);
+            System.out.println(em);
+
             // insert
             em.persist(member);
             trans.commit();
         } catch (NoResultException e) {
             e.printStackTrace();
             trans.rollback();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         } finally {
-            em.close();
+            if (em != null) {
+                em.close();
+
+            }
         }
     }
 
     public static memberJPA selectMember(final String username) {
+        EntityManagerFactory emf = null;
+        EntityManager em = null;
+        EntityTransaction trans = null;
         // make entity manager
         emf = dbUtil.getEMF();
         em = emf.createEntityManager();
@@ -51,12 +62,18 @@ public class memberJPADAO {
             e.printStackTrace();
             return null;
         } finally {
-            em.close();
+            if (em != null) {
+                em.close();
+
+            }
         }
         return member;
     }
 
     public static memberJPA checkMember(final String uname, final String password) {
+        EntityManagerFactory emf = null;
+        EntityManager em = null;
+        EntityTransaction trans = null;
         // make entity manager
         emf = dbUtil.getEMF();
         em = emf.createEntityManager();
@@ -73,7 +90,10 @@ public class memberJPADAO {
             e.printStackTrace();
             return null;
         } finally {
-            em.close();
+            if (em != null) {
+                em.close();
+
+            }
         }
         return member;
 

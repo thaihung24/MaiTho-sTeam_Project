@@ -42,6 +42,7 @@ import="java.sql.*"
                     <td>${user.email}</td>
                     <td>${user.contact}</td>
                     <td>${user.gentle}</td>
+                    <td>${user.avt}</td>
                 </tr>
             </tbody>
         </table>

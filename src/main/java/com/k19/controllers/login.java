@@ -13,10 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import com.k19.models.member;
 import com.k19.models.memberJPA;
-import com.k19.models.memberavtSample;
 import com.google.gson.Gson;
 import com.k19.DAO.memberDAO;
 import com.k19.DAO.memberJPADAO;
@@ -62,6 +60,8 @@ public class login extends HttpServlet {
                 // valid
                 // set session
                 session.setAttribute("username", uname);
+                session.setAttribute("member", member);
+                //
                 req.setAttribute("member", member);
                 // create cookies
                 Cookie cookiea = new Cookie("usernameCookie", uname);
@@ -75,11 +75,13 @@ public class login extends HttpServlet {
                 cookieb.setPath("/");
                 resp.addCookie(cookieb);
                 // Add data base and let sample fetch it
-                memberavtSample sample;
+                // memberavtSample sample;
 
                 mess = "Success Login";
                 // Get json
                 String jsonMember = new Gson().toJson(member);
+                System.out.println("data:");
+                System.out.println(jsonMember);
                 req.setAttribute("data", jsonMember);
                 // change it to Home
                 String url = "/index.jsp";

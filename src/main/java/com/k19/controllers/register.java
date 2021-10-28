@@ -59,6 +59,8 @@ public class register extends HttpServlet {
             final String email = req.getParameter("email");
             final String contact = req.getParameter("contact");
             final String gentle = req.getParameter("gentle");
+            // sample avt
+            String avt = "https://scontent.fsgn5-10.fna.fbcdn.net/v/t1.6435-1/cp0/p50x50/242671555_1290676461378883_7058234362211864781_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=7206a8&_nc_ohc=B7XwOqgR6i4AX-5GZcU&_nc_ht=scontent.fsgn5-10.fna&oh=2579620110dcc27bc686497f21eb7a6f&oe=619B779F";
             // final member member = new member();
             final memberJPA member = new memberJPA();
             member.setFirstName(firstName);
@@ -69,6 +71,7 @@ public class register extends HttpServlet {
             member.setEmail(email);
             member.setContact(contact);
             member.setGentle(gentle);
+            member.setAvt(avt);
 
             // Halo Data
             try {// try to insert value
@@ -78,11 +81,11 @@ public class register extends HttpServlet {
                 req.setAttribute("user", (memberJPA) member);
 
                 url = "/thanks.jsp";
-                System.out.println("insert");
+                System.out.println("inserted");
 
                 getServletContext().getRequestDispatcher("/WEB-INF/views" + url).forward((ServletRequest) req,
                         (ServletResponse) resp);
-            } catch (Exception e) {
+            } catch (NullPointerException e) {
                 e.printStackTrace();
             }
         } else if (action.equals("cancel")) {
