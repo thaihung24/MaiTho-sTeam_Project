@@ -18,9 +18,9 @@
 
         <body>
             <div class="Employee-Form col-8 ml-a mr-a">
-                <div class="text-left">Welcome to my team . We have 2 admins included Hoang Loc and Thai Hung</div>
+                <div class="text-left">Welcome to my team . We have 2 admins included Le Hoang Loc and Nguyen Thai Hung </div>
                 <!-- <%-- <div><p>${pageContext.request.contextPath}</p></div> --%> -->
-                <form action="<%=request.getContextPath()%>/sign-up/confirm" method="POST" id="registerForm">
+                <form action="<%=request.getContextPath()%>/member/sign-up/confirm" method="POST" id="registerForm">
                     <input type="hidden" name="action" value="submit">
 
                     <div class="form-row mt-4 align-center justify-content-center">
@@ -70,9 +70,18 @@
                         </div>
                         <div class="form-row submit-block">
                             <div class="">
-                                <a href="${pageContext.request.contextPath}" style ="visibility: hidden" class="form-button btn btn-secondary mt-4 cancel-bt">Cancel</a>
+                                <a href="${pageContext.request.contextPath}/" style ="visibility: hidden" class="form-button btn btn-secondary mt-4 cancel-bt">Cancel</a>
                             </div>
                         </div>
+                    </div>
+                    <!-- New -->
+                    <div class="form-row flex-column align-center">
+                        <div class="col-md-8">
+                            <div class="mb__dk">
+                                <button type="submit" form="registerForm" class="form-button btn btn-success mt-4 signup-bt">Register</button>
+                            </div>
+                        </div>
+
                     </div>
                 </form>
             </div>
@@ -90,7 +99,24 @@
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-            
+            <script>
+            console.log("register")
+                const listRow = document.querySelectorAll(".form-row");
+                window.addEventListener("resize", (e) => {
+                    let width = window.innerWidth;
+                    listRow.forEach((v, i) => {
+                        if (width <= 768) {
+                            if (v.classList.contains("mt-4")) {
+                                v.classList.remove("mt-4");
+                            }
+                        } else {
+                            if (!v.classList.contains("mt-4")) {
+                                v.classList.add("mt-4");
+                            }
+                        }
+                    });
+                }); 
+            </script>
         </body>
 
         </html>

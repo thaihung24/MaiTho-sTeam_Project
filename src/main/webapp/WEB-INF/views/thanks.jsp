@@ -46,7 +46,7 @@ import="java.sql.*"
             </tbody>
         </table>
                 <button type="button" class="btn btn-primary last-bt">
-                <a href="${pageContext.request.contextPath}/sign-in">Đăng nhập</a>
+                <a href="${pageContext.request.contextPath}/member/sign-in">Đăng nhập</a>
                 </button>
             <%-- Cho khách hàng dến trang mua hàng --%>
                 <%-- <c:if test = "${login != null}">

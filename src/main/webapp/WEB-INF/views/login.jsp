@@ -13,14 +13,16 @@ import="java.sql.*"
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Login page</title>
+            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/layout/main.css">
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/member/login.css">
         </head>
 
         <body>
-            <form action="<%=request.getContextPath()%>/sign-in/confirm" method="post">
+            <form action="<%=request.getContextPath()%>/member/sign-in/confirm" method="post">
+                <input type="hidden" name="action" value="submit">
                 <div class="imgcontainer">
-                    <img src="https://lh3.googleusercontent.com/proxy/TkyCKvBiO_7Ng_l_LWVX2rGZ-Tb_CF0chlx6lA9JqRGwY-U9lLjTPDIVG7Mu2Ko14o7w8BYJBfs147PxpiXFDtG4M6AaiEiQGlpEhnt1gZFAye_o8oe5Gg-aSt139kxmHo4_h3UDVA" alt="Avatar" class="avatar">
+                    <img src="${pageContext.request.contextPath}/resource/assets/img/member/login/avt.png" alt="Avatar" class="avatar">
                 </div>
 
                 <div class="container">
@@ -28,22 +30,37 @@ import="java.sql.*"
                     <input id="uname" type="text" placeholder="Enter Username" name="username" required>
 
                     <label for="psw"><b>Password</b></label>
-                    <input id="psw" type="password" placeholder="Enter Password" name="password" required>
-
-                    <button type="submit">Login</button>
+                    <input id="psw" type="password" placeholder="Enter Password" name="password" title="Password at least 8 characters avoid special characters"  required>
+                    <%-- pattern="[^\n]{8,}" --%>
+                    <%-- clear announce --%>
+                    <p class="announce">
+                    <c:out value="${sessionScope.message}" />
+                    </p>
+                    <!-- message -->
+                    <p class="message">
+                        At least 8 chars
+                    </p>
+                    <!-- Progress bar -->
+                    <div class="progress-bar" style="display: none;">
+                        <div class="w3-light-grey">
+                            <div id="myBar" class="w3-container w3-red" style="height:24px;width:0%"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-bt">login</button>
 
                     <!-- Maybe i will do it next time -->
                     <label> 
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                        <input type="checkbox" checked="checked" value="tick" name="remember"> Remember me
                       </label>
                 </div>
 
                 <!-- Maybe i will do it next time -->
                 <div style="background-color: #F2E1B8;" class="container" style="background-color:#f1f1f1">
-                    <button type="button" class="cancelbtn">Cancel</button>
+                    <a type="button" href="${pageContext.request.contextPath}/" class="cancelbtn">Cancel</a>
                     <span class="psw">Forgot <a href="#">password?</a></span>
                 </div>
             </form>
+            <script src="${pageContext.request.contextPath}/resource/assets/js/login.js"></script>
         </body>
 
         </html>

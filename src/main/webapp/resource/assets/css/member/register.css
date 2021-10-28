@@ -5,6 +5,7 @@
 }
 
 * {
+    overflow: hidden;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -75,4 +76,37 @@ body {
 
 .text-left {
     padding-top: 4px;
+}
+
+.mb__dk {
+    display: none;
+}
+
+
+/* Responsive */
+
+
+/* MOBILE, small TABLET */
+
+@media (max-width:859px) {
+    .text-left {
+        display: none;
+    }
+}
+
+@media (max-width:500px) {
+    .mb__dk {
+        display: flex;
+        margin-bottom: 18px
+    }
+    .button-submit {
+        display: none;
+    }
+    .signup-bt {
+        flex: 1;
+        margin: 0;
+    }
+    label {
+        margin: 0;
+    }
 }

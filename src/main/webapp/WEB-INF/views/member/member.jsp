@@ -35,20 +35,41 @@ import="java.sql.*"
                 <div class="col l-7 m-7 c-7">
                     <div class="intro__about">
                         <h1>$0.00</h1>
-                        <h3>Đăng kí</h3>
+                        <h3>Đăng nhập</h3>
                         <p>Tham gia để trở thành một phần của
                             <br> nhóm chúng tôi K19 THHL.</p>
-                        <a href="${pageContext.request.contextPath}/sign-in" class="intro__button">
-                            <h4>
-                                ĐĂNG KÍ
-                            </h4>
-                        </a>
+                        <div class="bt__wrap">
+                            <a href="${pageContext.request.contextPath}/member/sign-in" class="intro__button">
+                                <h4>
+                                    đăng nhập
+                                </h4>
+                            </a>
+                            <a href="${pageContext.request.contextPath}/member/sign-up" class="intro__button intro__button-dk">
+                                    <h4>
+                                        đăng kí
+                                    </h4>
+                            </a> 
+                        </div>
+                        
+                        <span class="intro__semibt">
+                            <span class="intro__semibt-span">
+                            Chưa có tài khoản
+                            </span> 
+                            <a href="${pageContext.request.contextPath}/member/sign-up">
+                            đăng kí
+                            </a>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <div class="logo logo--1">
+        <img src="${pageContext.request.contextPath}/resource/assets/img/home/covid/logo/healthcare_guidelines-2.png" alt="">
+    </div>
+    <div class="logo logo--2">
+        <img src="${pageContext.request.contextPath}/resource/assets/img/home/covid/logo/healthcare_guidelines-2.png" alt="">
+    </div>
 </body>
 
 </html>

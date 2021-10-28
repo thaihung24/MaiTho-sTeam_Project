@@ -18,18 +18,37 @@ import="java.sql.*"
 </head>
 
 <body>
-    <c:forEach var="cookies" items="${pageContext.request.cookies}">
-        <c:if test = "${cookies.name == username}">
-            <c:set var = "username" scope = "session" value = "${cookies.value}"/>
-        </c:if>
-        <c:if test = "${cookies.name == sessionID}">
-            <c:set var = "sessionID" scope = "request" value = "${cookies.value}"/>
-        </c:if>
-    </c:forEach>
-<h1>Halo <%= session.getAttribute("username") %> from Session</h1>
+        <%-- get cookie --%>        
+        <c:forEach var="cookie" items="${cookie}">
+            <c:if test = "${cookie.name == 'usernameCookie'}">
+                <c:set var = "username" value = "${cookie.value}"/>
+            </c:if>
+            <c:if test = "${cookie.name == 'sessionIDCookie'}">
+                <c:set var = "sessionID" value = "${cookie.value}"/>
+            </c:if>
+        </c:forEach>
 
-<h1>Halo ${username} from Session <br/>
-    Your sessionID is ${sessionID}
+        <%-- check exist cookie --%>
+        <c:set var = "flagcU" value = "${false}"/>
+        <c:if test = "${cookie.containsKey('usernameCookie')}">
+            <c:out value="Sai gon dep lam em oi"/>
+        </c:if>
+
+        <%--  --%>
+        <c:set var="sessionU" value="${sessionScope.username}"/>
+            <%-- <h1>Halo <%= session.getAttribute("username") %> from Session</h1> --%>
+        <c:choose>
+            <c:when test="${flagcU}">
+                <h1>Halo ${username} from Cookie <br/>
+                Your sessionID is ${sessionID} from Cookie</h1>
+                <br/>
+                <h1>Your session Username is ${sessionU}</h1>
+            </c:when>
+            <c:otherwise>
+                <h1>Halo my friend, Welcome. Go to shopping</h1> <br/>
+                <a href="${pageContext.request.contextPath}/member/sign-in">shopping</a>
+            </c:otherwise>
+        </c:choose>
 </h1>
 </body>
 
