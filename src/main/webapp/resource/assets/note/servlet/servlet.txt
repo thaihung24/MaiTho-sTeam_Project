@@ -1,5 +1,5 @@
 -memberServlet
     action : viewAlbums-, checkUser, viewCookies-, deleteCookies-, registerUser+
 
--cookie : usernameCookie, sessionIDCookie,member
+-cookie : usernameCookie, sessionIDCookie, member
 -session : username, message(status of member), member-

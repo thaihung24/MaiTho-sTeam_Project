@@ -40,8 +40,6 @@ public class memberNav extends HttpServlet {
         // We will check cookies first time when member try to login
         // tomcat
         // slug.equals("sign-in")
-        System.out.println(temp);
-        System.out.println(slug);
 
         if (slug.equals("sign-in")) {
             Cookie[] allc = req.getCookies();
@@ -81,9 +79,6 @@ public class memberNav extends HttpServlet {
                 getServletContext().getRequestDispatcher(tempurl).forward((ServletRequest) req, (ServletResponse) resp);
             }
         }
-        // getServletContext().getRequestDispatcher(req.getContextPath() +
-        // "/WEB-INF/views/register.jsp")
-        // .forward((HttpServletRequest) req, (HttpServletResponse) resp);
 
         final RequestDispatcher rd = req.getRequestDispatcher(url);
         rd.forward((HttpServletRequest) req, (HttpServletResponse) resp);

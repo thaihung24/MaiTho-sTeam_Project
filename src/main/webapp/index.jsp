@@ -86,6 +86,9 @@ import="java.sql.*"
             </li>
             <li class="Menu__Contact"><a href="">CONTACT</a></li>
         </div>
+
+    <input type="hidden" class="JSON" name="JSON" value='${sessionScope.memberJSON}'>
+
         <div class="Other">
 
             <!-- user -->
@@ -111,7 +114,12 @@ import="java.sql.*"
             </li>
             <!--user icon -->
             <li class="Other__item Other__User">
-                <a class="fa fa-user" href="${pageContext.request.contextPath}/member"></a>
+                <c:if test="${sessionScope.memberJSON == null}">
+                    <a class="fa fa-user" href="${pageContext.request.contextPath}/member"></a>
+                </c:if>
+                <c:if test="${sessionScope.memberJSON != null}">
+                    <a class="fas fa-user-cog" href="${pageContext.request.contextPath}/edit"></a> 
+                </c:if>
             </li>
             <!--cart icon -->
             <li class="Other__item Other__shoopping-bag">
@@ -197,7 +205,6 @@ import="java.sql.*"
             <div>@SARK</div>
         </div>
     </footer>
-    <input type="hidden" class="JSON" name="JSON" value='${sessionScope.memberJSON}'>
     <%-- <input type="hidden" class="JSON" name="JSON" value="${member.avt}"> --%>
 
 
