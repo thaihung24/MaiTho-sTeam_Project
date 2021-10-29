@@ -1,9 +1,9 @@
-<!-- <%@ page language="java" 
+<%@ page language="java" 
 contentType="text/html;charset=utf-8"
 pageEncoding="utf-8"
 import="java.sql.*"
 %>
-    <%-- Loc change --%> -->
+    <%-- Loc change --%> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,9 +95,10 @@ import="java.sql.*"
                 <div class="member__avt">
                     <!-- <img src=""
                                 alt="avt" srcset=""> -->
+                <img class="js__memberimg" src="${pageContext.request.contextPath}/resource/assets/img/member/error/member.png" alt="avt" srcset=""> 
                 </div>
                 <div class="member__name">
-                
+                    <span class="js__membername">Guest</span>
                 </div>
             </div>
 
@@ -196,8 +197,8 @@ import="java.sql.*"
             <div>@SARK</div>
         </div>
     </footer>
-    <input type="hidden" class="JSON" name="JSON" value="${data}">
-    <input type="hidden" class="JSON" name="JSON" value="${member.avt}">
+    <input type="hidden" class="JSON" name="JSON" value='${sessionScope.memberJSON}'>
+    <%-- <input type="hidden" class="JSON" name="JSON" value="${member.avt}"> --%>
 
 
 
@@ -254,49 +255,33 @@ import="java.sql.*"
     //container
     const memberAvt = document.querySelector(".member__avt");
     const memberName = document.querySelector(".member__name");
-
-    // mock data
-    const data = [{
-        nickname: "Lộc Lê",
-        avt: "https://scontent.fsgn5-10.fna.fbcdn.net/v/t1.6435-1/cp0/p50x50/242671555_1290676461378883_7058234362211864781_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=7206a8&_nc_ohc=B7XwOqgR6i4AX-5GZcU&_nc_ht=scontent.fsgn5-10.fna&oh=2579620110dcc27bc686497f21eb7a6f&oe=619B779F",
-    }, {
-        nickname: "Hưng Nguyễn",
-        avt: "https://scontent.fdad3-4.fna.fbcdn.net/v/t1.6435-9/228404487_369364367880670_8609231857746490642_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=O5yZY62TIIUAX-D5m3d&_nc_ht=scontent.fdad3-4.fna&oh=349f2bacb60d88dc5c9688e668cf13c7&oe=619E2C7F",
-    }, {
-        nickname: "Uncle Grandpa",
-        avt: "https://i0.wp.com/i.pinimg.com/originals/d2/33/89/d2338917719a4fc941887a7181eef485.png?ssl=1",
-    },
-     ];
-    // Util
-    // Img error
-    function imgValid(img) {
-        img.onerror = () => {
-            img.setAttribute("src", "./member.png");
-        };
-    }
+    //JSON
+    const dataJSONE = document.querySelector(".JSON");
+    const dataJSON = JSON.parse(dataJSONE.value);
+    // 
+    const hideImg = document.querySelector(".js__memberimg");
+    const hideName = document.querySelector(".js__membername")
+    hideImg.style.display = "none";
+    hideName.style.display ="none";
     //handle data
-    function getInfo(nickname) {
-        data.forEach((v, i) => {
-            if (v.nickname == nickname) {
-                let myAvt = document.createElement("img");
-                let myName = document.createElement("span");
-                myAvt.setAttribute("src", v.avt);
-                imgValid(myAvt);
-                myName.innerHTML = `<span>${nickname}</span>`;
-                memberAvt.appendChild(myAvt);
-                memberName.appendChild(myName);
-            }
-        });
+    function getInfo(username,avt) {
+        let myAvt = document.createElement("img");
+        let myName = document.createElement("span");
+        myAvt.setAttribute("src", avt);
+        let uname = username || "guest";
+        myName.innerHTML ="<span>"+uname+"</span>";
+        memberAvt.appendChild(myAvt);
+        memberName.appendChild(myName);
     }
-    var {
-        nickname
-    } = data[2];
-    getInfo(nickname);
-    const dataJSON = document.querySelectorAll(".JSON");
-    console.log(dataJSON[1])
-    console.log(dataJSON[1].value)
-    console.log(dataJSON[0])
-    console.log(dataJSON[0].value)
+    // get data
+    const {username,avt} = dataJSON;
+    if(username != undefined || avt != undefined){
+        getInfo(username,avt);
+    }
+    else{
+        hideImg.style.display = "block";
+        hideName.style.display ="inline-block";
+    }
 
 </script>
 

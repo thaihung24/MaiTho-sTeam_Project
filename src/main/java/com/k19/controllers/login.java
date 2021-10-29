@@ -60,7 +60,6 @@ public class login extends HttpServlet {
                 // valid
                 // set session
                 session.setAttribute("username", uname);
-                session.setAttribute("member", member);
                 //
                 req.setAttribute("member", member);
                 // create cookies
@@ -80,9 +79,9 @@ public class login extends HttpServlet {
                 mess = "Success Login";
                 // Get json
                 String jsonMember = new Gson().toJson(member);
-                System.out.println("data:");
-                System.out.println(jsonMember);
-                req.setAttribute("data", jsonMember);
+
+                session.setAttribute("memberJSON", jsonMember);
+                //
                 // change it to Home
                 String url = "/index.jsp";
                 session.setAttribute("message", mess);
