@@ -11,6 +11,7 @@ import="java.sql.*"
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>SARK</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/fonts/icon_font/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/oneshot/home.css">
 </head>
 
@@ -87,7 +88,7 @@ import="java.sql.*"
             <li class="Menu__Contact"><a href="">CONTACT</a></li>
         </div>
 
-    <input type="hidden" class="JSON" name="JSON" value='${sessionScope.memberJSON}'>
+            <input type="hidden" class="JSON" name="JSON" value='${sessionScope.memberJSON}'>
 
         <div class="Other">
 
@@ -113,13 +114,12 @@ import="java.sql.*"
 
             </li>
             <!--user icon -->
-            <li class="Other__item Other__User">
-                <c:if test="${sessionScope.memberJSON == null}">
-                    <a class="fa fa-user" href="${pageContext.request.contextPath}/member"></a>
-                </c:if>
-                <c:if test="${sessionScope.memberJSON != null}">
-                    <a class="fas fa-user-cog" href="${pageContext.request.contextPath}/edit"></a> 
-                </c:if>
+            <li class="Other__item Other__User">          
+                <a class="fa fa-user js__icon--user"  href="${pageContext.request.contextPath}/member"></a>
+                <div class="js__icon--edit">        
+                        <a class="fas fa-user-cog" href="${pageContext.request.contextPath}/edit"></a> 
+                </div>
+                    
             </li>
             <!--cart icon -->
             <li class="Other__item Other__shoopping-bag">
@@ -265,7 +265,18 @@ import="java.sql.*"
     //JSON
     const dataJSONE = document.querySelector(".JSON");
     const dataJSON = JSON.parse(dataJSONE.value);
-    // 
+    //Icon change
+    const userE = document.querySelector(".Other__User")
+    const iconUser =  document.querySelector(".js__icon--user");
+    const iconEdit =  document.querySelector(".js__icon--edit");
+    if(${sessionScope.memberJSON eq null}){
+        iconUser.style.display ="block";
+    }
+    else{
+        iconUser.style.display ="none";
+        iconEdit.style.display = "block";
+    }
+    //
     const hideImg = document.querySelector(".js__memberimg");
     const hideName = document.querySelector(".js__membername")
     hideImg.style.display = "none";

@@ -5,9 +5,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import com.google.gson.Gson;
+import com.k19.models.lineItem;
 import com.k19.models.memberJPA;
 
 import connection.dbUtil;
@@ -98,4 +100,49 @@ public class memberJPADAO {
         return member;
 
     }
+
+    public static int updateMember(memberJPA member) {
+        EntityManagerFactory emf = null;
+        EntityManager em = null;
+        EntityTransaction trans = null;
+        // make entity manager
+        emf = dbUtil.getEMF();
+        em = emf.createEntityManager();
+        // get data
+        String firstName = member.getFirstName();
+        String lastName = member.getLastName();
+        String email = member.getEmail();
+        String contact = member.getContact();
+        String gentle = member.getGentle();
+        String uname = member.getUsername();
+        // query
+        String query = "Update member set firstName = :firstname, " + "lastName = :lastname," + "email = :email,"
+                + "gentle = :gentle," + "contact = :contact" + "Where username =:username";
+        Query q = em.createQuery(query);
+        q.setParameter("firstname", firstName);
+        q.setParameter("lastName", lastName);
+        q.setParameter("email", email);
+        q.setParameter("gentle", contact);
+        q.setParameter("contact", gentle);
+        q.setParameter("username", uname);
+        //
+        // start trans
+        int count = 0;
+        // 0 is failure
+        // !0 is true
+        try {
+            trans.begin();
+            count = q.executeUpdate();
+            trans.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        } finally {
+            em.close();
+        }
+        return count;
+    }
 }
+// Front-end
+// Back-end
+// Database

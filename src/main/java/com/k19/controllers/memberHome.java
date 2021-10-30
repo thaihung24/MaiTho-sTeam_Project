@@ -53,7 +53,7 @@ public class memberHome extends HttpServlet {
             // come back
             else {
                 memberJPA member = memberJPADAO.selectMember(c);
-
+                req.setAttribute("memberEdit", member);
                 String tempurl = "/edit.jsp";
                 getServletContext().getRequestDispatcher("/WEB-INF/views/member" + tempurl)
                         .forward((ServletRequest) req, (ServletResponse) resp);

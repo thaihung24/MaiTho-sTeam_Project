@@ -26,7 +26,7 @@
                     <div class="form-row mt-4 align-center justify-content-center">
                         <div class="col-md-3">
                             <label for="first_name">First name</label>
-                            <input id="first_name" name="firstName" type="text" class="form-control" required placeholder="Your first name">
+                            <input id="first_name" name="firstName" type="text"  class="form-control" required placeholder="Your first name">
                         </div>
                         <div class="col-md-3">
                             <label for="last_name">Last name</label>

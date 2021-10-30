@@ -85,6 +85,10 @@ body {
     width: 50px;
 }
 
+.js__icon--edit {
+    display: none;
+}
+
 .Menu .Menu__Trademark:hover .Menu__Trademark__List {
     visibility: visible;
     transition: 0.3s all linear;
