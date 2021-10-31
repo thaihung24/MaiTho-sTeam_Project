@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 
 import com.google.gson.Gson;
 import com.k19.models.lineItem;
+import com.k19.models.member;
 import com.k19.models.memberJPA;
 
 import connection.dbUtil;
@@ -101,13 +102,16 @@ public class memberJPADAO {
 
     }
 
-    public static int updateMember(memberJPA member) {
+    public void updateMember(memberJPA member) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
         EntityTransaction trans = null;
         // make entity manager
         emf = dbUtil.getEMF();
         em = emf.createEntityManager();
+        //
+        int _id = member.getId();
+        memberJPA memberJPA = em.getReference(memberJPA.class, _id);
         // get data
         String firstName = member.getFirstName();
         String lastName = member.getLastName();
@@ -117,30 +121,30 @@ public class memberJPADAO {
         String uname = member.getUsername();
         // query
         String query = "Update member set firstName = :firstname, " + "lastName = :lastname," + "email = :email,"
-                + "gentle = :gentle," + "contact = :contact" + "Where username =:username";
+                + "gentle = :gentle," + "contact = :contact " + "Where username =:username";
         Query q = em.createQuery(query);
         q.setParameter("firstname", firstName);
-        q.setParameter("lastName", lastName);
+        q.setParameter("lastname", lastName);
         q.setParameter("email", email);
         q.setParameter("gentle", contact);
         q.setParameter("contact", gentle);
         q.setParameter("username", uname);
         //
         // start trans
-        int count = 0;
-        // 0 is failure
-        // !0 is true
         try {
-            trans.begin();
-            count = q.executeUpdate();
-            trans.commit();
+            //
+            memberJPA.setFirstName(firstName);
+            memberJPA.setLastName(firstName);
+            memberJPA.setEmail(firstName);
+            memberJPA.setContact(firstName);
+            memberJPA.setGentle(firstName);
+            memberJPA.setFullName(fullName);
+
         } catch (Exception e) {
             e.printStackTrace();
-            return 0;
         } finally {
             em.close();
         }
-        return count;
     }
 }
 // Front-end

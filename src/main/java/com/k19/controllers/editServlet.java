@@ -35,7 +35,6 @@ public class editServlet extends HttpServlet {
         HttpSession session = req.getSession();
         // get action
         String action = req.getParameter("action");
-        String url = null;
         // get data
         final String firstName = req.getParameter("firstName");
         final String lastName = req.getParameter("lastName");
@@ -57,23 +56,21 @@ public class editServlet extends HttpServlet {
             member.setGentle(gentle);
 
             try {
-                if (this.mjdao.updateMember(member) != 0) {
-                    req.setAttribute("user", (memberJPA) member);
-                    url = "/index.jsp";
-                    System.out.println("updated");
-                    // Get json
-                    String jsonMember = new Gson().toJson(member);
-                    session.setAttribute("memberJSON", jsonMember);
-                } else {
-                    System.out.println("Update Failure");
-                }
+                this.mjdao.updateMember(member);
+                req.setAttribute("user", (memberJPA) member);
+                System.out.println("updated");
+                // Get json
+                String jsonMember = new Gson().toJson(member);
+                session.setAttribute("memberJSON", jsonMember);
 
-                getServletContext().getRequestDispatcher(url).forward((ServletRequest) req, (ServletResponse) resp);
+                getServletContext().getRequestDispatcher("/index.jsp").forward((ServletRequest) req,
+                        (ServletResponse) resp);
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }
         } else if (action.equals("cancel")) {
             resp.sendRedirect(req.getContextPath() + "/");
         }
+
     }
 }
