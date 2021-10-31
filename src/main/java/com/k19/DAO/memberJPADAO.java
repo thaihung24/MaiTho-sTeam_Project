@@ -7,6 +7,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.k19.models.lineItem;
@@ -73,6 +74,26 @@ public class memberJPADAO {
         return member;
     }
 
+    public static memberJPA selectMemberbyId(int _id) {
+        EntityManagerFactory emf = null;
+        EntityManager em = null;
+        // make entity manager
+        emf = dbUtil.getEMF();
+        em = emf.createEntityManager();
+        memberJPA member = null;
+        try {
+            member = em.find(memberJPA.class, _id);
+        } catch (NoResultException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return member;
+    }
+
     public static memberJPA checkMember(final String uname, final String password) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
@@ -103,44 +124,25 @@ public class memberJPADAO {
     }
 
     public void updateMember(memberJPA member) {
+        //
         EntityManagerFactory emf = null;
         EntityManager em = null;
         EntityTransaction trans = null;
         // make entity manager
-        emf = dbUtil.getEMF();
-        em = emf.createEntityManager();
+        // emf = dbUtil.getEMF();
+        // em = emf.createEntityManager();
         //
-        int _id = member.getId();
-        memberJPA memberJPA = em.getReference(memberJPA.class, _id);
-        // get data
-        String firstName = member.getFirstName();
-        String lastName = member.getLastName();
-        String email = member.getEmail();
-        String contact = member.getContact();
-        String gentle = member.getGentle();
-        String uname = member.getUsername();
-        // query
-        String query = "Update member set firstName = :firstname, " + "lastName = :lastname," + "email = :email,"
-                + "gentle = :gentle," + "contact = :contact " + "Where username =:username";
-        Query q = em.createQuery(query);
-        q.setParameter("firstname", firstName);
-        q.setParameter("lastname", lastName);
-        q.setParameter("email", email);
-        q.setParameter("gentle", contact);
-        q.setParameter("contact", gentle);
-        q.setParameter("username", uname);
         //
         // start trans
         try {
-            //
-            memberJPA.setFirstName(firstName);
-            memberJPA.setLastName(firstName);
-            memberJPA.setEmail(firstName);
-            memberJPA.setContact(firstName);
-            memberJPA.setGentle(firstName);
-            memberJPA.setFullName(fullName);
-
+            emf = Persistence.createEntityManagerFactory("k19WebApp");
+            em = emf.createEntityManager();
+            trans = em.getTransaction();
+            trans.begin();
+            em.merge(member);
+            trans.commit();
         } catch (Exception e) {
+            trans.rollback();
             e.printStackTrace();
         } finally {
             em.close();

@@ -116,4 +116,5 @@ public class memberJPA {
     public void setGentle(final String gentle) {
         this.gentle = gentle;
     }
+
 }

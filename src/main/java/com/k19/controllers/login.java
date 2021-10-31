@@ -73,6 +73,11 @@ public class login extends HttpServlet {
                 cookieb.setMaxAge(60 * 60 * 24);
                 cookieb.setPath("/");
                 resp.addCookie(cookieb);
+                // get user id
+                Cookie cookiec = new Cookie("userIdCookie", Integer.toString(member.getId()));
+                cookiec.setMaxAge(60 * 60 * 24);
+                cookiec.setPath("/");
+                resp.addCookie(cookiec);
                 // Add data base and let sample fetch it
                 // memberavtSample sample;
 

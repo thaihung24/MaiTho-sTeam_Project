@@ -45,14 +45,16 @@ public class memberHome extends HttpServlet {
         } else if (slug.equals("edit")) {
             Cookie[] allc = req.getCookies();
             // get last value
-            String c = cookieUtil.getCookieValue(allc, "usernameCookie");
+            // String c = cookieUtil.getCookieValue(allc, "usernameCookie");
+            String c = cookieUtil.getCookieValue(allc, "userIdCookie");
             if (c.equals("") || c.equals(null)) {
                 getServletContext().getRequestDispatcher("/WEB-INF/views/member/member.jsp").forward(req, resp);
 
             }
             // come back
             else {
-                memberJPA member = memberJPADAO.selectMember(c);
+                // memberJPA member = memberJPADAO.selectMember(c);
+                memberJPA member = memberJPADAO.selectMemberbyId(Integer.parseInt(c));
                 req.setAttribute("memberEdit", member);
                 String tempurl = "/edit.jsp";
                 getServletContext().getRequestDispatcher("/WEB-INF/views/member" + tempurl)

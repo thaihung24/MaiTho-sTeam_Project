@@ -18,7 +18,7 @@ import com.k19.models.memberJPA;
 
 @WebServlet(urlPatterns = { "/edit/confirm" })
 public class editServlet extends HttpServlet {
-    memberJPADAO mjdao = null;
+    memberJPADAO mjdao;
 
     // init
     public editServlet() {
@@ -35,42 +35,55 @@ public class editServlet extends HttpServlet {
         HttpSession session = req.getSession();
         // get action
         String action = req.getParameter("action");
-        // get data
-        final String firstName = req.getParameter("firstName");
-        final String lastName = req.getParameter("lastName");
-        final String fullName = firstName + " " + lastName;
-        final String email = req.getParameter("email");
-        final String contact = req.getParameter("contact");
-        final String gentle = req.getParameter("gentle");
+        int _id = Integer.parseInt(req.getParameter("_id"));
+        // get entity need edit
+        // error do thang session return null
+        // memberJPA memberEdit = (memberJPA) session.getAttribute("memberEdit");
+        System.out.println(session.getAttribute("memberEdit"));
+        memberJPA memberEdit = this.mjdao.selectMemberbyId(_id);
         //
-        if (action.equals(null)) {
-            action = "cancel";
-        }
-        if (action.equals("edit")) {
-            final memberJPA member = new memberJPA();
-            member.setFirstName(firstName);
-            member.setLastName(lastName);
-            member.setFullName(fullName);
-            member.setEmail(email);
-            member.setContact(contact);
-            member.setGentle(gentle);
-
-            try {
-                this.mjdao.updateMember(member);
-                req.setAttribute("user", (memberJPA) member);
-                System.out.println("updated");
-                // Get json
-                String jsonMember = new Gson().toJson(member);
-                session.setAttribute("memberJSON", jsonMember);
-
-                getServletContext().getRequestDispatcher("/index.jsp").forward((ServletRequest) req,
-                        (ServletResponse) resp);
-            } catch (NullPointerException e) {
-                e.printStackTrace();
+        if (memberEdit != null) {
+            if (action.equals(null)) {
+                action = "cancel";
             }
-        } else if (action.equals("cancel")) {
-            resp.sendRedirect(req.getContextPath() + "/");
-        }
+            if (action.equals("edit")) {
+                // get data
+                final String firstName = req.getParameter("firstName");
+                final String lastName = req.getParameter("lastName");
+                final String fullName = firstName + " " + lastName;
+                final String email = req.getParameter("email");
+                final String contact = req.getParameter("contact");
+                final String gentle = req.getParameter("gentle");
+                memberEdit.setFirstName(firstName);
+                memberEdit.setLastName(lastName);
+                memberEdit.setFullName(fullName);
+                memberEdit.setEmail(email);
+                memberEdit.setContact(contact);
+                memberEdit.setGentle(gentle);
+                try {
+                    System.out.println("Update---------------");
+                    this.mjdao.updateMember(memberEdit);
+                    System.out.println("merge---------------");
 
+                    req.setAttribute("username", (memberJPA) memberEdit);
+                    System.out.println("updated------------");
+                    // Get json
+                    String jsonMember = new Gson().toJson(memberEdit);
+                    session.setAttribute("memberJSON", jsonMember);
+
+                    getServletContext().getRequestDispatcher("/index.jsp").forward((ServletRequest) req,
+                            (ServletResponse) resp);
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                } finally {
+                    // destroy old edit info
+                    session.invalidate();
+                }
+            } else if (action.equals("cancel")) {
+                resp.sendRedirect(req.getContextPath() + "/");
+            }
+        } else {
+            System.out.println("Select member by id method return null");
+        }
     }
 }
