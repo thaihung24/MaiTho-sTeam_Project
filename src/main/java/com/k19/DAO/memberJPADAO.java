@@ -5,13 +5,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.k19.models.lineItem;
-import com.k19.models.member;
 import com.k19.models.memberJPA;
 
 import connection.dbUtil;
@@ -28,9 +23,6 @@ public class memberJPADAO {
             em = emf.createEntityManager();
             trans = em.getTransaction();
             trans.begin();
-            System.out.println(emf);
-            System.out.println(em);
-
             // insert
             em.persist(member);
             trans.commit();
@@ -39,6 +31,7 @@ public class memberJPADAO {
             trans.rollback();
         } catch (NullPointerException e) {
             e.printStackTrace();
+            trans.rollback();
         } finally {
             if (em != null) {
                 em.close();
@@ -50,7 +43,6 @@ public class memberJPADAO {
     public static memberJPA selectMember(final String username) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
-        EntityTransaction trans = null;
         // make entity manager
         emf = dbUtil.getEMF();
         em = emf.createEntityManager();
@@ -97,7 +89,6 @@ public class memberJPADAO {
     public static memberJPA checkMember(final String uname, final String password) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
-        EntityTransaction trans = null;
         // make entity manager
         emf = dbUtil.getEMF();
         em = emf.createEntityManager();

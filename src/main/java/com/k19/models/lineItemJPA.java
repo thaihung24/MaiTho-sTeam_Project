@@ -2,18 +2,18 @@ package com.k19.models;
 
 import java.text.NumberFormat;
 
-public class lineItem {
-    private product product;
+public class lineItemJPA {
+    private productJPA product;
     private int qty;
 
-    public lineItem() {
+    public lineItemJPA() {
     }
 
-    public product getProduct() {
+    public productJPA getProduct() {
         return product;
     }
 
-    public void setProduct(product product) {
+    public void setProduct(productJPA product) {
         this.product = product;
     }
 

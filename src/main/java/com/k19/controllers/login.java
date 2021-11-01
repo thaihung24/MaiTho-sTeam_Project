@@ -68,11 +68,6 @@ public class login extends HttpServlet {
                 cookiea.setPath("/");
                 resp.addCookie(cookiea);
 
-                String sid = session.getId();
-                Cookie cookieb = new Cookie("sessionIDCookie", sid);
-                cookieb.setMaxAge(60 * 60 * 24);
-                cookieb.setPath("/");
-                resp.addCookie(cookieb);
                 // get user id
                 Cookie cookiec = new Cookie("userIdCookie", Integer.toString(member.getId()));
                 cookiec.setMaxAge(60 * 60 * 24);

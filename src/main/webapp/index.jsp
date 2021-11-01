@@ -123,8 +123,8 @@ import="java.sql.*"
             </li>
             <!--cart icon -->
             <li class="Other__item Other__shoopping-bag">
-                <a class="fa fa-shopping-cart" href=""></a>
-
+                <a class="fa fa-shopping-cart" href="${pageContext.request.contextPath}/cart"></a>
+            </li>
         </div>
     </header>
 

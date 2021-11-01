@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.k19.models.cart;
+import com.k19.models.cartJPA;
 
 public class cartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,10 +28,10 @@ public class cartServlet extends HttpServlet {
         } else if (action.equals("cart")) {
             HttpSession session = req.getSession();
             // check cart
-            cart cart = (cart) session.getAttribute("cart");
+            cartJPA cart = (cartJPA) session.getAttribute("cart");
             // init cart
             if (cart == null) {
-                cart = new cart();
+                cart = new cartJPA();
             }
         } else if (action.equals("checkout")) {
             url = "/checkout.jsp";

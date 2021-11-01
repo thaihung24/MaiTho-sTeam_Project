@@ -2,14 +2,14 @@ package com.k19.models;
 
 import java.util.ArrayList;
 
-public class cart {
-    private ArrayList<lineItem> items;
+public class cartJPA {
+    private ArrayList<lineItemJPA> items;
 
-    public cart() {
-        items = new ArrayList<lineItem>();
+    public cartJPA() {
+        items = new ArrayList<lineItemJPA>();
     }
 
-    public ArrayList<lineItem> getItems() {
+    public ArrayList<lineItemJPA> getItems() {
         return items;
     }
 
@@ -17,11 +17,11 @@ public class cart {
         return items.size();
     }
 
-    public void addItem(lineItem item) {
+    public void addItem(lineItemJPA item) {
         String code = item.getProduct().getCode();
         int qty = item.getQty();
         for (int i = 0; i < items.size(); i++) {
-            lineItem lineItem = items.get(i);
+            lineItemJPA lineItem = items.get(i);
             if (lineItem.getProduct().getCode().equals(code)) {
                 lineItem.setQty(qty);
                 return;
@@ -30,10 +30,10 @@ public class cart {
         items.add(item);
     }
 
-    public void removeItem(lineItem item) {
+    public void removeItem(lineItemJPA item) {
         String code = item.getProduct().getCode();
         for (int i = 0; i < items.size(); i++) {
-            lineItem lineItem = items.get(i);
+            lineItemJPA lineItem = items.get(i);
             if (lineItem.getProduct().getCode().equals(code)) {
                 items.remove(i);
                 return;

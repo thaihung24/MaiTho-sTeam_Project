@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.k19.DAO.memberJPADAO;
+import com.k19.models.cartJPA;
 import com.k19.models.memberJPA;
 import com.k19.utils.cookieUtil;
 
-@WebServlet(urlPatterns = { "/member", "/edit" })
+@WebServlet(urlPatterns = { "/member", "/edit", "/cart" })
 public class memberHome extends HttpServlet {
 
     // [GET] /member
@@ -57,6 +59,28 @@ public class memberHome extends HttpServlet {
                 memberJPA member = memberJPADAO.selectMemberbyId(Integer.parseInt(c));
                 req.setAttribute("memberEdit", member);
                 String tempurl = "/edit.jsp";
+                getServletContext().getRequestDispatcher("/WEB-INF/views/member" + tempurl)
+                        .forward((ServletRequest) req, (ServletResponse) resp);
+            }
+        } else if (slug.equals("cart")) {
+            HttpSession session = req.getSession();
+            cartJPA cart;
+            // Need synchronize access to member's cart
+            final Object lock = req.getSession().getId().intern();
+            synchronized (lock) {
+                cart = (cartJPA) session.getAttribute("cart");
+                // Get json
+                String jsonCart = new Gson().toJson(cart);
+                session.setAttribute("cartJSON", jsonCart);
+            }
+            if (cart == null) {
+                cart = new cartJPA();
+                session.setAttribute("cart", cart);
+                resp.sendRedirect(req.getContextPath() + "/cart");
+            }
+            // come back
+            else {
+                String tempurl = "/cart.jsp";
                 getServletContext().getRequestDispatcher("/WEB-INF/views/member" + tempurl)
                         .forward((ServletRequest) req, (ServletResponse) resp);
             }
