@@ -64,26 +64,23 @@ public class memberHome extends HttpServlet {
             }
         } else if (slug.equals("cart")) {
             HttpSession session = req.getSession();
-            cartJPA cart;
-            // Need synchronize access to member's cart
-            final Object lock = req.getSession().getId().intern();
-            synchronized (lock) {
-                cart = (cartJPA) session.getAttribute("cart");
-                // Get json
-                String jsonCart = new Gson().toJson(cart);
-                session.setAttribute("cartJSON", jsonCart);
-            }
+            cartJPA cart = null;
+            // Need synchronize access to member's carts
+            // final Object lock = req.getSession().getId().intern();
+            cart = (cartJPA) session.getAttribute("cart");
+            // Get json
+
             if (cart == null) {
                 cart = new cartJPA();
                 session.setAttribute("cart", cart);
-                resp.sendRedirect(req.getContextPath() + "/cart");
             }
             // come back
             else {
-                String tempurl = "/cart.jsp";
-                getServletContext().getRequestDispatcher("/WEB-INF/views/member" + tempurl)
-                        .forward((ServletRequest) req, (ServletResponse) resp);
+                String jsonCart = new Gson().toJson(cart.getItems());
+                session.setAttribute("cartJSON", jsonCart);
             }
+            getServletContext().getRequestDispatcher("/WEB-INF/views/member/cart.jsp").forward((ServletRequest) req,
+                    (ServletResponse) resp);
         }
     }
 

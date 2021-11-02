@@ -36,37 +36,44 @@ import="java.sql.*"
                             <div class="col l-3 cart-left__item">
                                 <span>Số lượng</span>
                             </div>
-                            <div class="col l-3 cart-left__item">
+                            <div class="col l-3 casxrt-left__item">
                                 <span>Tổng tiền</span>
                             </div>
                         </div>
                         <!-- Cart left list product -->
                         <div class="list-wrap">
                         <input type="hidden" class="JSON__cart" value="${sessionScope.cartJSON}" />
-                        <c:foreach var="i" items="${sessionScope.cart}">
-                            <div class="row">
-                                <div class="cart-left__list">
-                                    <div class="col l-3 cart-left__item">
-                                        <img class="js__img" alt="">
-                                    </div>
-                                    <div class="col l-3 cart-left__item">
-                                        <span class="js__price"></span>
-                                    </div>
-                                    <div class="col l-3 cart-left__item ">
-                                        <span class="cart-left__qty">
-                                            <i class="fas fa-minus js__minus"></i>
-                                            <!-- <span class="qty__input" contenteditable="true">1</span> -->
-                                        <input class="qty__input" type="number" class="" name="" id="" value="1">
-                                        <i class="fas fa-plus js__plus"></i>
-                                        </span>
-                                    </div>
-                                    <div class="col l-3 cart-left__item">
-                                        <span class="js__total">1</span>
+                        <%-- Form --%>
+                        <form id="editForm" action="${pageContext.request.contextPath}/cart/update" method="POST">
+                            <input type="hidden" name="action" value="cart">
+                            <c:if test="${}">
+                            </c:if>
+                            <c:forEach var="item" items="${sessionScope.cart}">
+                                <c:set var="product" value="${item.product}"/>
+                                <input type="hidden" name="product_code" value="${product.code}" />
+                                <div class="row">
+                                    <div class="cart-left__list">
+                                        <div class="col l-3 cart-left__item">
+                                            <img class="js__img" alt="">
+                                        </div>
+                                        <div class="col l-3 cart-left__item">
+                                            <span class="js__price"></span>
+                                        </div>
+                                        <div class="col l-3 cart-left__item ">
+                                            <span class="cart-left__qty">
+                                                <i class="fas fa-minus js__minus"></i>
+                                                <!-- <span class="qty__input" contenteditable="true">1</span> -->
+                                            <input class="qty__input" type="number" class="" name="qty" id="" value="${item.qty}">
+                                            <i class="fas fa-plus js__plus"></i>
+                                            </span>
+                                        </div>
+                                        <div class="col l-3 cart-left__item">
+                                            <span class="js__total">1</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </c:foreach>
-
+                            </c:forEach>
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -97,14 +104,16 @@ import="java.sql.*"
                                 </div>
                             </div>
                             <div class="cart-right__checkout">
-                                <button class="cart-right__checkout-bt cart-right__checkout-bt--checkout" type="submit">
+                            <%-- submit button --%>
+                                <button type="submit" form="editForm" class="cart-right__checkout-bt cart-right__checkout-bt--checkout" type="submit">
                                     <a href="#">
                                         <span>check out
                                             <i class="fas fa-shopping-basket"></i>
                                         </span>
                                     </a>
                                 </button>
-                                <button class="cart-right__checkout-bt cart-right__checkout-bt--paypal" type="submit">
+                            <%-- submit button --%>
+                                <button type="submit" form="editForm" class="cart-right__checkout-bt cart-right__checkout-bt--paypal" type="submit">
                                     <a href="#">
                                         <i style="font-size: 20px;" class="fab fa-paypal logo_icon"></i>
                                         <i class="logo_word" style="color: #253b80;">Pay</i>

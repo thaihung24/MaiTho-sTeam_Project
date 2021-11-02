@@ -14,42 +14,37 @@ import javax.persistence.Table;
 public class productJPA {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String code;
-    @Column(nullable = false, unique = false)
-    private String _name;
+    private String code; // khoa chinh
+    private String brand; // phân thư mục
+    private String classify; // phân loại đồ để mốt tìm kiếm
     private String desc;
-    @Column(nullable = false, unique = false)
     private double price;
-    private String avt;
 
-    public String get_name() {
-        return _name;
-    }
-
-    public void set_name(String _name) {
-        this._name = _name;
-    }
-
-    public productJPA() {
-        code = "";
-        desc = "";
-        price = 0;
-    }
-
-    public String getAvt() {
-        return avt;
-    }
-
-    public void setAvt(String avt) {
-        this.avt = avt;
-    }
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "code")
     public String getCode() {
         return code;
     }
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getClassify() {
+        return classify;
+    }
+
+    public void setClassify(String classify) {
+        this.classify = classify;
     }
 
     public String getDesc() {

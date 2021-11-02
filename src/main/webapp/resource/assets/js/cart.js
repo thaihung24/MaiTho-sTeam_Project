@@ -12,7 +12,9 @@ const imgList = $$(".js__img");
 console.log(imgList);
 //JSON
 const dataJSONE = document.querySelector(".JSON__cart");
-const dataJSON = JSON.parse(dataJSONE.value);
+// dataJSON = [product={},qty},product={},qty},product={},qty}]
+const dataJSON = JSON.parse(dataJSONE.value.product);
+console.log(dataJSON);
 //fake data
 // const data = [{
 //         name: `T-shirt`,
@@ -52,12 +54,21 @@ function defaultPrice() {
 }
 // set img for all product
 // img validation
+// "${pageContext.request.contextPath}/resource/assets/img/product/" + brand +"/" + datasrc
 function defaultImg() {
     imgList.forEach((v, i) => {
-        let datasrc = dataJSON[i].avt || "./assets/img/No_Picture.jpg";
-        v.setAttribute("src", datasrc);
+        let datasrc = dataJSON[i].code || "./assets/img/No_Picture.jpg";
+        let brand = dataJSON[i].brand;
+        v.setAttribute(
+            "src",
+            "${pageContext.request.contextPath}/resource/assets/img/product/" +
+            brand +
+            "/" +
+            datasrc
+        );
         v.onerror = () => {
-            v.src = "./assets/img/No_Picture.jpg";
+            v.src =
+                "${pageContext.request.contextPath}/resource/assets/img/product/No_Picture.jpg";
         };
     });
 }

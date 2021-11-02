@@ -3,19 +3,23 @@ contentType="text/html;charset=utf-8"
 pageEncoding="utf-8"
 import="java.sql.*"
 %>
-    <%-- Loc change --%> 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>SARK</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/oneshot/home.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/fonts/icon_font/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/oneshot/home.css">
+    <link rel="stylesheet"  type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/layout/categoriess.css">
 </head>
 
-<body>
+<body >
+    <!-- <div class="mock-header"></div> -->
+    <!-- Begin Header -->
     <header class="Header">
         <div class="Logo">
             <a href="#"> <img src="${pageContext.request.contextPath}/resource/assets/img/home/logo_200x200.png" height="150" width="150" alt="Amazing" class="reponsive"></a>
@@ -69,18 +73,18 @@ import="java.sql.*"
                 <ul class="Menu__Store__List">
                     <li> <a>North</a>
                         <ul class="List">
-                            <li><a href="">Hà Nội</a></li>
+                            <li><a href="products?action=display_products">Hà Nội</a></li>
                         </ul>
                     </li>
                     <li><a>Central</a>
                         <ul class="List">
                             <li><a href="">Huế</a></li>
-                            <li><a href="">Đà Nẵng</a></li>
+                            <li><a href="products?action=display_products">Đà Nẵng</a></li>
                         </ul>
                     </li>
                     <li><a>Southern</a>
                         <ul class="List">
-                            <li><a href="">Hồ Chí Minh</a></li>
+                            <li><a href="products?action=display_products?=">Hồ Chí Minh</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -122,60 +126,66 @@ import="java.sql.*"
                     
             </li>
             <!--cart icon -->
-            <li class="Other__item Other__shoopping-bag">
+            <li class="Other__item Other__shoopping-bag"    >
                 <a class="fa fa-shopping-cart" href="${pageContext.request.contextPath}/cart"></a>
             </li>
         </div>
     </header>
-
-    <section id="Slide">
-        <div class="row">
-            <div class="row-1">
-                <div class="row-1-col-1">
-                    <div class="aspect-ratio-169">
-                        <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/badhabit/slideshow_1.jpg" alt=""></a>
-                        <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/slide/slide2.jpg" alt=""></a>
-                        <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/badhabit/slideshow_3.jpg" alt=""></a>
-                        <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/bobui/slideshow2.jpg" alt=""></a>
-                    </div>
-                    <div class="dot-container">
-                        <div class="dot active"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                    </div>
+    <section class="category">
+        <div class="category-right ">
+            <div class="category-right-top row">
+                <div class="category-right-top-item">
+                    <p id="show-product">Tất cả sản phẩm</p>
                 </div>
-            </div>
-            <div class="row-2">
-                <div class="row-2-item">
-                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/badhabit/slideshow_1.jpg" alt="" class="row-2-item"></a>
+                <div  class="category-right-top-item">
+                    <select size="1" name="" id="">
+                        <option value=""><li class="list" data-filter="All" >Tất cả sản phẩm</li></option>
+                        <option value=""><li class="list"data-filter="Tshirt" >T-Shirt</li></option>
+                        <option value=""><li class="list" data-filter="Shirt">SHIRT</li> </option>
+                    </select>
                 </div>
-                <div class="row-2-item">
-                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/bobui/sp1.PNG" alt="" class="row-2-item"></a>
+                <div  class="category-right-top-item">
+                    <select size="1" name="" id="">
+                        <option value="" ><p style="color: black;">Sắp xếp</p> </option>
+                        <option value="" ><p style="color: black;">Cao đến thấp</p> </option>
+                        <option value="" ><p style="color: black;">Thấp đến cao</p></option>
+                    </select>
                 </div>
-                <div class="row-2-item">
-                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/bobui/sp2.PNG" alt="" class="row-2-item"></a>
-                </div>
-                <div class="row-2-item">
-                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/dirtycoin/sp1.PNG" alt="" class="row-2-item"></a>
-                </div>
-                <div class="row-2-item">
-                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/dirtycoin/sp2.PNG" alt="" class="row-2-item"></a>
-                </div>
-                <div class="row-2-item">
-                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/bobui/slideshow2.jpg" alt="" class="row-2-item"></a>
-                </div>
-            </div>
-            <div class="row-3"></div>
+            </div>  
         </div>
+        <ul class="products">
+            <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+                <c:forEach var="product" items="${products}">
+                    <li>
+                        <div class="product-item">
+                            <div class="product-top">
+                                <a href="" class="product-thumb">
+                                    <img src="${pageContext.request.contextPath}/resource/assets/img/product/${product.brand}/${product.code}">
+                                </a>
+                                <a href="" class="buy-now">MUA NGAY</a>
+                            </div>
+                            
+                        </div>
+                       <div class="product-info">
+                           <a href=""class="product-cat">${product.classify}</a>
+                           <a href="" class="product-name">${product.desc} </a>
+                           <div class="product-price"><span>${product.price}<sub>đ</sub></span></div>
+                       </div>
+                    </li>
+                   
+                </c:forEach>
+           
+        </ul>
+        
+       
     </section>
     <!-------------------app---------------->
     <footer>
         <section class="app-container">
             <p>Tải ứng dụng SARK</p>
             <div class="app-google">
-                <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/appstore.png"></a>
-                <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/googleplay.png"></a>
+                <a href=""> <img src="image/appstore.png"></a>
+                <a href=""> <img src="image/googleplay.png"></a>
             </div>
             <p>Nhận bản tin SARK</p>
             <li> <input placeholder="Email" type="text">
@@ -205,102 +215,12 @@ import="java.sql.*"
             <div>@SARK</div>
         </div>
     </footer>
-    <%-- <input type="hidden" class="JSON" name="JSON" value="${member.avt}"> --%>
-
-
-
-
 </body>
-<script>
-    /* const header=document.querySelector("header")
-                                                                                    window.addEventListener("scroll",function(){
-                                                                                        x=window.pageYOffset
-                                                                                        if(x>0)
-                                                                                        {
-                                                                                            header.classList.add("sticky")
-                                                                                        }
-                                                                                        else{
-                                                                                            header.classList.remove("sticky")
-                                                                                        }
-                                                                                    })
-                                                                                    */
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+    <script>
 
-    const imgPosition = document.querySelectorAll(".aspect-ratio-169 a img")
-    const imgContainer = document.querySelector(".aspect-ratio-169")
-    const dotItem = document.querySelectorAll(".dot")
-    let imgNumber = imgPosition.length
-    index = 0
-        /*console.log(imgPosition)*/
-    imgPosition.forEach(function(${pageContext.request.contextPath}/resource/assets/img/home,index) {
-        ${pageContext.request.contextPath}/resource/assets/img/home.style.left = index * 100 + "%"
-        dotItem[index].addEventListener("click", function() {
-            slider(index)
-        })
-    })
-
-    function imgSlide() {
-        index++;
-        console.log(index)
-        if (index >= imgNumber) {
-            index = 0;
-        }
-        imgContainer.style.left = "-" + index * 100 + "%"
-        slider(index)
-
-    }
-
-    function slider(index) {
-        imgContainer.style.left = "-" + index * 100 + "%"
-        const dotActive = document.querySelector('.active')
-        dotActive.classList.remove("active")
-        dotItem[index].classList.add("active")
-    }
-    setInterval(imgSlide, 5000)
-</script>
-<!-- NEW -->
-<script>
-    //container
-    const memberAvt = document.querySelector(".member__avt");
-    const memberName = document.querySelector(".member__name");
-    //JSON
-    const dataJSONE = document.querySelector(".JSON");
-    const dataJSON = JSON.parse(dataJSONE.value);
-    //Icon change
-    const userE = document.querySelector(".Other__User")
-    const iconUser =  document.querySelector(".js__icon--user");
-    const iconEdit =  document.querySelector(".js__icon--edit");
-    if(${sessionScope.memberJSON eq null}){
-        iconUser.style.display ="block";
-    }
-    else{
-        iconUser.style.display ="none";
-        iconEdit.style.display = "block";
-    }
-    //
-    const hideImg = document.querySelector(".js__memberimg");
-    const hideName = document.querySelector(".js__membername")
-    hideImg.style.display = "none";
-    hideName.style.display ="none";
-    //handle data
-    function getInfo(username,avt) {
-        let myAvt = document.createElement("img");
-        let myName = document.createElement("span");
-        myAvt.setAttribute("src", avt);
-        let uname = username || "guest";
-        myName.innerHTML ="<span>"+uname+"</span>";
-        memberAvt.appendChild(myAvt);
-        memberName.appendChild(myName);
-    }
-    // get data
-    const {username,avt} = dataJSON;
-    if(username != undefined || avt != undefined){
-        getInfo(username,avt);
-    }
-    else{
-        hideImg.style.display = "block";
-        hideName.style.display ="inline-block";
-    }
-
-</script>
-
+    </script>
 </html>
