@@ -14,9 +14,9 @@ import="java.sql.*"
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/assets/css/layout/grid.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/assets/css/layout/main.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/assets/css/layout/responsive.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/assets/css/member/cart.css">
-    <link rel="stylesheet" href="./assets/main.css">
 </head>
 
 <body class="cart-bg">
@@ -46,9 +46,7 @@ import="java.sql.*"
                         <%-- Form --%>
                         <form id="editForm" action="${pageContext.request.contextPath}/cart/update" method="POST">
                             <input type="hidden" name="action" value="cart">
-                            <c:if test="${}">
-                            </c:if>
-                            <c:forEach var="item" items="${sessionScope.cart}">
+                            <c:forEach var="item" items="${sessionScope.cart.items}">
                                 <c:set var="product" value="${item.product}"/>
                                 <input type="hidden" name="product_code" value="${product.code}" />
                                 <div class="row">
@@ -78,7 +76,6 @@ import="java.sql.*"
                     </div>
                 </div>
                 <div class="col l-4">
-                    <form action="">
                         <div class="cart-side cart-right">
                             <div class="line"></div>
                             <div class="cart-right__total">
@@ -103,9 +100,9 @@ import="java.sql.*"
 
                                 </div>
                             </div>
-                            <div class="cart-right__checkout">
                             <%-- submit button --%>
-                                <button type="submit" form="editForm" class="cart-right__checkout-bt cart-right__checkout-bt--checkout" type="submit">
+                            <div class="cart-right__checkout">
+                                <button form="editForm" class="cart-right__checkout-bt cart-right__checkout-bt--checkout" type="submit">
                                     <a href="#">
                                         <span>check out
                                             <i class="fas fa-shopping-basket"></i>
@@ -113,7 +110,7 @@ import="java.sql.*"
                                     </a>
                                 </button>
                             <%-- submit button --%>
-                                <button type="submit" form="editForm" class="cart-right__checkout-bt cart-right__checkout-bt--paypal" type="submit">
+                                <button form="editForm" class="cart-right__checkout-bt cart-right__checkout-bt--paypal" type="submit">
                                     <a href="#">
                                         <i style="font-size: 20px;" class="fab fa-paypal logo_icon"></i>
                                         <i class="logo_word" style="color: #253b80;">Pay</i>
@@ -122,7 +119,6 @@ import="java.sql.*"
                                 </button>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
