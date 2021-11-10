@@ -28,6 +28,19 @@ public class ProductsServlet extends HttpServlet {
             // get list of products
             List<productJPA> products = productJPADAO.selectProducts();
             request.setAttribute("products", products);
+            request.setAttribute("show", "Tất cả sản phẩm ");
+        } else if (action.equals("display_group_products")) {
+            String classify = request.getParameter("classify");
+            List<productJPA> products = productJPADAO.selectGroupProducts(classify);
+            request.setAttribute("products", products);
+        } else if (action.equals("Tshirt")) {
+            List<productJPA> products = productJPADAO.selectGroupProducts("Tshirt");
+            request.setAttribute("products", products);
+            request.setAttribute("show", "T-SHIRT");
+        } else if (action.equals("SHIRT")) {
+            List<productJPA> products = productJPADAO.selectGroupProducts("Shirt");
+            request.setAttribute("products", products);
+            request.setAttribute("show", "SHIRT");
         }
         getServletContext().getRequestDispatcher(url).forward(request, response);
 

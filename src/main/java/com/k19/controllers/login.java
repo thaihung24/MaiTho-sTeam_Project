@@ -85,7 +85,10 @@ public class login extends HttpServlet {
                 // change it to Home
                 String url = "/index.jsp";
                 session.setAttribute("message", mess);
-                getServletContext().getRequestDispatcher(url).forward((ServletRequest) req, (ServletResponse) resp);
+
+                // getServletContext().getRequestDispatcher(url).forward((ServletRequest) req,
+                // (ServletResponse) resp);
+                resp.sendRedirect("/");
             } else {
                 // invalid password
                 // try to get latest data

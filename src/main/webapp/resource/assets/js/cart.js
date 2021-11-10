@@ -1,5 +1,3 @@
-alert("Ting cart");
-
 //const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 //price

@@ -3,7 +3,7 @@ contentType="text/html;charset=utf-8"
 pageEncoding="utf-8"
 import="java.sql.*"
 %>
-
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,65 +11,58 @@ import="java.sql.*"
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/layout/grid.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/layout/main.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/oneshot/firstpage.css">
-    <%-- Font --%>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
-
+    <title>Halo</title>
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/assets/css/layout/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/assets/css/member/member.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/assets/css/layout/responsive.css">
+    <!--  -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/assets/css/layout/grid.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/assets/css/layout/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/assets/css/member/memberAdd.css">
 </head>
 
 <body>
-    <div class="session">
-        <div class="grid wide">
-            <div class="row intro">
-                <div class="col l-5 m-5 c-5">
-                    <div class="intro__picture">
-                        <img src="https://static.nike.com/a/images/f_auto/dpr_1.0/w_415,c_limit/6581f3a5-db55-4a35-8e89-dec548f219b1/nike-just-do-it.jpg" alt="" class="intro__img">
+    <section class="slider_section">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
 
-                    </div>
-                </div>
-                <div class="col l-7 m-7 c-7">
-                    <div class="intro__about">
-                        <h1>$0.00</h1>
-                        <h3>Đăng nhập</h3>
-                        <p>Tham gia để trở thành một phần của
-                            <br> nhóm chúng tôi K19 THHL.</p>
-                        <div class="bt__wrap">
-                            <a href="${pageContext.request.contextPath}/member/sign-in" class="intro__button">
-                                <h4>
-                                    đăng nhập
-                                </h4>
-                            </a>
-                            <a href="${pageContext.request.contextPath}/member/sign-up" class="intro__button intro__button-dk">
-                                    <h4>
-                                        đăng kí
-                                    </h4>
-                            </a> 
+                <div class="container-fluid padding_dd">
+                    <div class="carousel-caption">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="text-bg">
+                                    <span>Welcome To Sark</span>
+                                    <h1>Sark Love YalL</h1>
+                                    <p> Chào mừng bạn đến với cửa hàng trực tuyến của thương hiệu SARK, chúc bạn có một buổi mua hàng vui vẻ. </p>
+                                    <form class="Vegetable">
+                                        <input class="Vegetable_fom" placeholder="Coming soon" disabled type="text" name="Vegetable">
+                                    </form>
+                                    <a href="${pageContext.request.contextPath}/member/sign-in">Đăng nhập</a> 
+                                    <a href="${pageContext.request.contextPath}/member/sign-up">Đăng kí</a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <div class="images_box">
+                                    <!-- <figure><img src="./parker-burchfield-tvG4WvjgsEY-unsplash.jpg"></figure> -->
+                                    <figure>
+                                        <iframe src="https://www.youtube.com/embed/UGEYaRyLgLg?autoplay=1&loop=1" frameborder="0" allow='autoplay'></iframe>
+                                    </figure>
+
+                                </div>
+                            </div>
                         </div>
-                        
-                        <span class="intro__semibt">
-                            <span class="intro__semibt-span">
-                            Chưa có tài khoản
-                            </span> 
-                            <a href="${pageContext.request.contextPath}/member/sign-up">
-                            đăng kí
-                            </a>
-                        </span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="logo logo--1">
-        <img src="${pageContext.request.contextPath}/resource/assets/img/home/covid/logo/healthcare_guidelines-2.png" alt="">
-    </div>
-    <div class="logo logo--2">
-        <img src="${pageContext.request.contextPath}/resource/assets/img/home/covid/logo/healthcare_guidelines-2.png" alt="">
-    </div>
+    </section>
+    <img class="mario" src="https://i.gifer.com/origin/ac/acf3abb6da430dd78cc99f925bb52d49.gif" alt="">
+    <span class="mario mario__name">Lộc</span>
+    <img class="mario" src="https://i.pinimg.com/originals/b6/90/40/b69040ba12c1b3a9d9d998e3e67154e9.gif" alt="">
+    <span class="mario mario__name">Hưng</span>
 </body>
 
 </html>

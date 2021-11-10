@@ -39,7 +39,7 @@ public class productJPADAO {
         }
     }
 
-    // select
+    // select single
     public static productJPA selectProduct(final String productCode) throws ClassNotFoundException, SQLException {
         EntityManagerFactory emf = null;
         EntityManager em = null;
@@ -59,7 +59,7 @@ public class productJPADAO {
         }
         return product;
     }
-
+    //  select all
     public static List<productJPA> selectProducts() {
         EntityManager em = dbUtil.getEMF().createEntityManager();
         String qString = "SELECT u from productJPA u";
@@ -74,4 +74,22 @@ public class productJPADAO {
         }
         return products;
     }
+    //Filter
+    public static List<productJPA> selectGroupProducts(String classify) {
+        EntityManager em = dbUtil.getEMF().createEntityManager();
+        String qString = "SELECT u from productJPA u " +
+                "WHERE u.classify = :classify";
+        TypedQuery<productJPA> q = em.createQuery(qString, productJPA.class);
+        q.setParameter("classify", classify);
+        List<productJPA> products;
+        try {
+            products = q.getResultList();
+            if (products == null || products.isEmpty())
+                products = null;
+        } finally {
+            em.close();
+        }
+        return products;
+    }
+
 }

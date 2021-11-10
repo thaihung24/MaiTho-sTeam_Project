@@ -15,6 +15,13 @@ import="java.sql.*"
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/fonts/icon_font/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet"  type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/layout/categoriess.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/flaviusmatis-simplePagination.js-da97104/tests/lib/jasmine-1.3.1/jasmine.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/flaviusmatis-simplePagination.js-da97104/tests/lib/jasmine-1.3.1/jasmine.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/flaviusmatis-simplePagination.js-da97104/tests/lib/jasmine-1.3.1/jasmine-html.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/flaviusmatis-simplePagination.js-da97104/tests/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/flaviusmatis-simplePagination.js-da97104/simplePagination.css">
+    
 </head>
 
 <body >
@@ -60,7 +67,7 @@ import="java.sql.*"
                     <li class="Menu__Trademark__List__DAVIES"><a href="">DAVIES</a>
                         <ul class="List">
                             <img src="${pageContext.request.contextPath}/resource/assets/img/home/logodavies.jpg" alt="" class="reponsive">
-                            <li><a href="">T-SHIRT</a></li>
+                            <li><a href="products?action=Tshirt">T-SHIRT</a></li>
                             <li><a href="">SHIRT</a></li>
                             <li><a href="">OUTERWEAR</a></li>
                             <li><a href="">HOODIES</a></li>
@@ -84,7 +91,7 @@ import="java.sql.*"
                     </li>
                     <li><a>Southern</a>
                         <ul class="List">
-                            <li><a href="products?action=display_products?=">Hồ Chí Minh</a></li>
+                            <li><a href="products?action=display_products?">Hồ Chí Minh</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -135,20 +142,21 @@ import="java.sql.*"
         <div class="category-right ">
             <div class="category-right-top row">
                 <div class="category-right-top-item">
-                    <p id="show-product">Tất cả sản phẩm</p>
+                    <p id="show-product">${show}</p>
                 </div>
                 <div  class="category-right-top-item">
-                    <select size="1" name="" id="">
-                        <option value=""><li class="list" data-filter="All" >Tất cả sản phẩm</li></option>
-                        <option value=""><li class="list"data-filter="Tshirt" >T-Shirt</li></option>
-                        <option value=""><li class="list" data-filter="Shirt">SHIRT</li> </option>
+                    <select size="1" name="" id="gender" onchange="genderChanged(this)">
+                        <option value="" id="">Lọc</option>
+                        <option value="all" id="all">Tất cả sản phẩm</option>
+                        <option value="T-SHIRT" id="T-SHIRT">T-Shirt</option>
+                        <option value="SHIRT" id="SHIRT">SHIRT</a></option>
                     </select>
                 </div>
                 <div  class="category-right-top-item">
                     <select size="1" name="" id="">
-                        <option value="" ><p style="color: black;">Sắp xếp</p> </option>
-                        <option value="" ><p style="color: black;">Cao đến thấp</p> </option>
-                        <option value="" ><p style="color: black;">Thấp đến cao</p></option>
+                        <option value="" >Sắp xếp </option>
+                        <option value="" >Cao đến thấp</option>
+                        <option value="" >Thấp đến cao</option>
                     </select>
                 </div>
             </div>  
@@ -174,11 +182,9 @@ import="java.sql.*"
                     </li>
                    
                 </c:forEach>
-           
-        </ul>
-        
-       
+        </ul> 
     </section>
+    <div id="pagination-container"></div>
     <!-------------------app---------------->
     <footer>
         <section class="app-container">
@@ -187,7 +193,7 @@ import="java.sql.*"
                 <a href=""> <img src="image/appstore.png"></a>
                 <a href=""> <img src="image/googleplay.png"></a>
             </div>
-            <p>Nhận bản tin SARK</p>
+            <p id="demo">Nhận bản tin SARK</p>
             <li> <input placeholder="Email" type="text">
                 <i class="fa fa-arrow-left" aria-current="true"></i>
             </li>
@@ -220,7 +226,46 @@ import="java.sql.*"
     src="https://code.jquery.com/jquery-3.6.0.js"
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/flaviusmatis-simplePagination.js-da97104/jquery.simplePagination.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/flaviusmatis-simplePagination.js-da97104/tests/spec/SpecHelper.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/flaviusmatis-simplePagination.js-da97104/tests/spec/SimplePaginationSpec.js"></script>
     <script>
+        $(function() {
+        var items = $(".products li");
+            var numItems = items.length;
+            var perPage = 8;
 
+            items.slice(perPage).hide();
+
+            $('#pagination-container').pagination({
+                items: numItems,
+                itemsOnPage: perPage,
+                prevText: "&laquo;",
+                nextText: "&raquo;",
+                onPageClick: function (pageNumber) {
+                    var showFrom = perPage * (pageNumber - 1);
+                    var showTo = showFrom + perPage;
+                    items.hide().slice(showFrom, showTo).show();
+                }
+            });
+            //$.pagination(container, options);
+
+            container.addHook('beforeInit', function () {
+            window.console && console.log('beforeInit...');
+            });
+            container.pagination(options);
+
+            container.addHook('beforePageOnClick', function () {
+            window.console && console.log('beforePageOnClick...');
+            //return false
+            });
+        })
     </script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/js/Redirect.js"></script>
 </html>
