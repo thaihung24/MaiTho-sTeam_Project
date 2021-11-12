@@ -25,7 +25,7 @@ public class memberHome extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //
         String temp = req.getRequestURI().toString();
-        String slug = temp.substring(1, temp.length());// heroku 1 , tomcat 8
+        String slug = temp.substring(8, temp.length());// heroku 1 , tomcat 8
         System.out.println(slug);
         // handle slug
         if (slug.equals("member")) {

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public class cartJPA {
     private ArrayList<lineItemJPA> items;
+
+    public void setItems(ArrayList<lineItemJPA> items) {
+        this.items = items;
+    }
+
     // member id
     private int member_id;
     // status : 1 Đang mua hàng, 2 Đã đặt đơn

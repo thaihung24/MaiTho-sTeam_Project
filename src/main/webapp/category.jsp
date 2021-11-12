@@ -170,7 +170,8 @@ import="java.sql.*"
                                 <a href="" class="product-thumb">
                                     <img src="${pageContext.request.contextPath}/resource/assets/img/product/${product.brand}/${product.code}">
                                 </a>
-                                <a href="" class="buy-now">MUA NGAY</a>
+                                <form>
+                                <a href="${pageContext.request.contextPath}/cart/changecart?productID=${product.code}" class="buy-now">MUA NGAY</a>
                             </div>
                             
                         </div>

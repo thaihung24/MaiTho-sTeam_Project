@@ -41,8 +41,9 @@ import="java.sql.*"
                             </div>
                         </div>
                         <!-- Cart left list product -->
+                        <%-- Ting --%>
                         <div class="list-wrap">
-                        <input type="hidden" class="JSON__cart" value="${sessionScope.cartJSON}" />
+                        <input type="hidden" class="JSON__cart" value='${sessionScope.cartJSON}' />
                         <%-- Form --%>
                         <form id="editForm" action="${pageContext.request.contextPath}/cart/update" method="POST">
                             <input type="hidden" name="action" value="cart">

@@ -30,7 +30,7 @@ public class memberNav extends HttpServlet {
         // tomcat path : host/webapp/path
         // tomcat path : host/path
         String temp = req.getRequestURI().toString();
-        String slug = temp.substring(8, temp.length());// heroku 8 , tomcat 15
+        String slug = temp.substring(15, temp.length());// heroku 8 , tomcat 15
         // heroku
         // String path = req.getPathInfo();
         // ----------------------------------------
