@@ -22,7 +22,6 @@ public class memberJPA {
     private String password;
     private String email;
     private String contact;
-
     private String gentle;
     private String fullName;
     // profile

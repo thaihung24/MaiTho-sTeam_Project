@@ -1,4 +1,3 @@
-<%-- <!-- <%-- only sample purpose --%>
 <%-- <%@ include file="${pageContext.request.contextPath}/WEB-INF/views/common/footer.jsp" %> --%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
@@ -20,7 +19,7 @@
             <div class="Employee-Form col-8 ml-a mr-a">
                 <div class="text-left">Welcome to my team . We have 2 admins included Le Hoang Loc and Nguyen Thai Hung </div>
                 <!-- <%-- <div><p>${pageContext.request.contextPath}</p></div> --%> -->
-                <form action="<%=request.getContextPath()%>/member/sign-up/confirm" method="POST" id="registerForm">
+                <form action="<%=request.getContextPath()%>/member/sign-up/verify" method="POST" id="registerForm">
                     <input type="hidden" name="action" value="submit">
 
                     <div class="form-row mt-4 align-center justify-content-center">
@@ -44,8 +43,9 @@
                     </div>
                     <div class="form-row mt-4 flex-column align-center">
                         <div class="col-md-8 justify-content-center">
-                            <label for="user_name">Username</label>
-                            <input id="user_name" name="username" type="text" class="form-control" required placeholder="Your username">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="text" class="form-control" required placeholder="Your email">
+                            <p id="mess">${mess}</p>
                         </div>
                         <div class="col-md-8">
                             <label for="password">Password</label>
@@ -54,8 +54,8 @@
                     </div>
                     <div class="form-row mt-4 flex-column align-center">
                         <div class="col-md-8">
-                            <label for="address">Email</label>
-                            <input id="address" name="email" type="email" class="form-control" placeholder="Your Email">
+                            <label for="Re-typePassword">Re-typePassword</label>
+                            <input id="Password" name="Re-typePassword" type="Password" class="form-control" placeholder="Your password">
                         </div>
                         <div class="col-md-8">
                             <label for="contact">Contact</label>

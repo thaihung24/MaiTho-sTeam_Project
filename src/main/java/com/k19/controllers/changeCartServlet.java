@@ -36,24 +36,24 @@ public class changeCartServlet extends HttpServlet {
                         cart = new cartJPA();
                         ArrayList<lineItemJPA> list = new ArrayList<lineItemJPA>();
                         lineItemJPA item = new lineItemJPA();
-                        item.setQty(quantity);
+                        item.setQuantity(quantity);
                         item.setProduct(product);
                         list.add(item);
-                        cart.setItems(list);
+                       // cart.setItems(list);
                         session.setAttribute("cart", cart);
                     } else {
                         ArrayList<lineItemJPA> list = cart.getItems();
                         boolean check = false;
                         for (lineItemJPA item : list) {
                             if (item.getProduct().getCode() == product.getCode()) {
-                                item.setQty(item.getQty() + quantity);
+                                item.setQuantity(quantity);
                                 // update quantity
                                 check = true;
                             }
                         }
                         if (!check) {
                             lineItemJPA item = new lineItemJPA();
-                            item.setQty(quantity);
+                            item.setQuantity(quantity);
                             item.setProduct(product);
                             list.add(item);
                         }

@@ -51,7 +51,7 @@ public class updateCartServlet extends HttpServlet {
                 try {
                     // check if product in cart have existed in session yet
                     if (item.getProduct().getCode() == productJPADAO.selectProduct(productCode[index]).getCode()) {
-                        item.setQty(Integer.parseInt(qty[index]));
+                        item.setQuantity(Integer.parseInt(qty[index]));
                     }
                 } catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();

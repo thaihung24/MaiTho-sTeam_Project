@@ -21,7 +21,6 @@ public class memberServlet extends HttpServlet {
         if (action == null) {
             action = "viewAlbums"; // default action
         }
-
         // perform action and set URL to appropriate page
         String url = "/index.jsp";
         if (action.equals("viewAlbums")) {
@@ -33,21 +32,17 @@ public class memberServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-
         // forward to the view
         getServletContext().getRequestDispatcher("/WEB-INF/views" + url).forward(req, resp);
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-
         // perform action and set URL to appropriate page
         String url = "/index.jsp";
         if (action.equals("registerUser")) {
             url = "/register.jsp";
         }
-
         // forward to the view
         getServletContext().getRequestDispatcher("/WEB-INF/views" + url).forward(req, resp);
     }

@@ -15,7 +15,6 @@ import com.k19.models.member;
 import com.k19.models.memberJPA;
 import com.k19.DAO.memberDAO;
 import com.k19.DAO.memberJPADAO;
-
 // servlet mapping
 @WebServlet(name = "registerConfirmServlet", urlPatterns = { "/member/sign-up/confirm" })
 

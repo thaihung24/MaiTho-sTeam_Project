@@ -24,7 +24,7 @@ public class productJPA {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "code")
     public String getCode() {
-        return code;
+        return this.code;
     }
 
     public void setCode(String code) {
@@ -32,7 +32,7 @@ public class productJPA {
     }
 
     public String getBrand() {
-        return brand;
+        return this.brand;
     }
 
     public void setBrand(String brand) {
@@ -40,7 +40,7 @@ public class productJPA {
     }
 
     public String getClassify() {
-        return classify;
+        return this.classify;
     }
 
     public void setClassify(String classify) {
@@ -48,7 +48,7 @@ public class productJPA {
     }
 
     public String getDesc() {
-        return desc;
+        return this.desc;
     }
 
     public void setDesc(String desc) {
@@ -56,7 +56,7 @@ public class productJPA {
     }
 
     public double getPrice() {
-        return price;
+        return this.price;
     }
 
     public void setPrice(double price) {

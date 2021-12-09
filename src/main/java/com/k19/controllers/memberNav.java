@@ -24,13 +24,13 @@ public class memberNav extends HttpServlet {
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session = req.getSession();
-        String url = "/WEB-INF/views/register.jsp";
+        String url = "/WEB-INF/views/regs.jsp";
         // uri from webapp
         // url from host
         // tomcat path : host/webapp/path
         // tomcat path : host/path
         String temp = req.getRequestURI().toString();
-        String slug = temp.substring(15, temp.length());// heroku 8 , tomcat 15
+        String slug = temp.substring(8, temp.length());// heroku 8 , tomcat 15
         // heroku
         // String path = req.getPathInfo();
         // ----------------------------------------
@@ -69,8 +69,7 @@ public class memberNav extends HttpServlet {
 
             // first time
             if (c.equals("") || c.equals(null)) {
-                url = "/WEB-INF/views/register.jsp";
-
+                url = "/WEB-INF/views/regs.jsp";
             }
             // come back
             else {
@@ -79,7 +78,6 @@ public class memberNav extends HttpServlet {
                 getServletContext().getRequestDispatcher(tempurl).forward((ServletRequest) req, (ServletResponse) resp);
             }
         }
-
         final RequestDispatcher rd = req.getRequestDispatcher(url);
         rd.forward((HttpServletRequest) req, (HttpServletResponse) resp);
     }

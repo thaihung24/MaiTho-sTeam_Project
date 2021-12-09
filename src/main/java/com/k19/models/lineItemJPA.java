@@ -4,31 +4,27 @@ import java.text.NumberFormat;
 
 public class lineItemJPA {
     private productJPA product;
-    private int qty;
+    private int quantity;
 
     public lineItemJPA() {
     }
-
-    public productJPA getProduct() {
-        return product;
-    }
-
     public void setProduct(productJPA product) {
         this.product = product;
     }
-
-    public int getQty() {
-        return qty;
+    public productJPA getProduct() {
+        return this.product;
     }
-
-    public void setQty(int qty) {
-        this.qty = qty;
+    public int getQuantity() {
+        return this.quantity;
+    }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public double getTotal() {
-        return product.getPrice() * qty;
+        double total=quantity*product.getPrice();
+        return total;
     }
-
     public String getpriceFormatTotal() {
         NumberFormat cformat = NumberFormat.getCurrencyInstance();
         return cformat.format(this.getTotal());

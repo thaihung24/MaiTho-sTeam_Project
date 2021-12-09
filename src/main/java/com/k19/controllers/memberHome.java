@@ -1,6 +1,7 @@
 package com.k19.controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -13,19 +14,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.k19.DAO.UserDAO;
 import com.k19.DAO.memberJPADAO;
 import com.k19.models.cartJPA;
 import com.k19.models.memberJPA;
+import com.k19.models.Users;
 import com.k19.utils.cookieUtil;
 
-@WebServlet(urlPatterns = { "/member", "/edit", "/cart" })
+@WebServlet(urlPatterns = { "/member", "/edit", "/cart","/product" })
 public class memberHome extends HttpServlet {
 
     // [GET] /member
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //
         String temp = req.getRequestURI().toString();
-        String slug = temp.substring(8, temp.length());// heroku 1 , tomcat 8
+        String slug = temp.substring(1, temp.length());// heroku 1 , tomcat 8
         System.out.println(slug);
         // handle slug
         if (slug.equals("member")) {
@@ -40,8 +43,17 @@ public class memberHome extends HttpServlet {
             }
             // come back
             else {
-                String tempurl = "/index.jsp";
-                session.setAttribute("message", "Halo welcome back my friend");
+                String tempurl = "/WEB-INF/views/member/edit.jsp";
+                Users User;
+                try {
+                    User = UserDAO.selectUser(c);
+                    req.setAttribute("userEdit", User);
+                    session.setAttribute("message", "Halo welcome back my friend");
+                } catch (ClassNotFoundException | SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    tempurl="index.jsp";
+                }
                 getServletContext().getRequestDispatcher(tempurl).forward((ServletRequest) req, (ServletResponse) resp);
             }
 
@@ -80,7 +92,27 @@ public class memberHome extends HttpServlet {
                 String jsonCart = new Gson().toJson(cart.getItems());
                 session.setAttribute("cartJSON", jsonCart);
             }
-            getServletContext().getRequestDispatcher("/WEB-INF/views/member/cart.jsp").forward((ServletRequest) req,
+            getServletContext().getRequestDispatcher("/products?action=display_products").forward((ServletRequest) req,
+                    (ServletResponse) resp);
+        }
+        else if(slug.equals("product")){
+        //     HttpSession session = req.getSession();
+           
+        //     // Need synchronize access to member's carts
+        //     // final Object lock = req.getSession().getId().intern();
+        //    cartJPA cart = (cartJPA) session.getAttribute("cart");
+        //     // Get json
+
+        //     if (cart == null) {
+        //         cart = new cartJPA();
+        //         session.setAttribute("cart", cart);
+        //     }
+        //     // come back
+        //     else {
+        //         String jsonCart = new Gson().toJson(cart.getItems());
+        //         session.setAttribute("cartJSON", jsonCart);
+        //     }
+            getServletContext().getRequestDispatcher("/products").forward((ServletRequest) req,
                     (ServletResponse) resp);
         }
     }

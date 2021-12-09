@@ -14,7 +14,24 @@
     <session-timeout>120</session-timeout>
   </session-config>
   <!-- test -->
-
+  <!-- SMTP settings -->
+    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+ 
+    <context-param>
+        <param-name>username</param-name>
+        <param-value>hn58013@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>jalocphhronrqqsx</param-value>
+    </context-param>
   <!--  -->
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
@@ -23,11 +40,7 @@
   </welcome-file-list>
 
   <!-- 404 Page -->
-  <error-page>
-    <error-code>404</error-code>
-    <location>/WEB-INF/views/error/error404.jsp</location>
-  </error-page>
-
+ 
   <!-- Error Page -->
   <!-- <error-page>
     <location>/general-error.html</location>

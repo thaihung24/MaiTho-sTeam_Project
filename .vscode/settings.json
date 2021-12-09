@@ -3,7 +3,7 @@
         "hhibnu",
         "lqakffmnculcfp"
     ],
-    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.configuration.updateBuildConfiguration": "automatic",
     // "java.configuration.updateBuildConfiguration": "interactive",
     // "liveServer.settings.port": 5501
 }

@@ -11,8 +11,9 @@ import="java.sql.*"
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>SARK</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/fonts/icon_font/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/oneshot/home.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/layout/cart.css">
 </head>
 
 <body>
@@ -23,7 +24,7 @@ import="java.sql.*"
         <div class="Menu">
             <li class="Menu__Trademark"><a href="">TRADEMARK</a>
                 <ul class="Menu__Trademark__List">
-                    <li class="Menu__Trademark__List__Babhabit"><a href="carteogory.html">Bad Habits</a>
+                    <li class="Menu__Trademark__List__Babhabit"><a href="category.jsp">Bad Habits</a>
                         <ul class="List">
                             <img src="${pageContext.request.contextPath}/resource/assets/img/home/logobadhabit.jpg" alt="" class="reponsive">
                             <li> <a href="">T-SHIRT</a></li>
@@ -33,7 +34,7 @@ import="java.sql.*"
                             <li><a href="">SHORT & PANTS</a></li>
                         </ul>
                     </li>
-                    <li class="Menu__Trademark__List__Dirtycoins"><a href="">Dirty Coins</a>
+                    <li class="Menu__Trademark__List__Dirtycoins"><a href="category.jsp">Dirty Coins</a>
                         <ul class="List">
                             <img src="${pageContext.request.contextPath}/resource/assets/img/home/logodirtycoin.png" alt="" class="reponsive">
                             <li><a href="">T-SHIRT</a></li>
@@ -43,7 +44,7 @@ import="java.sql.*"
                             <li><a href="">SHORT & PANTS</a></li>
                         </ul>
                     </li>
-                    <li class="Menu__Trademark__List__UnCover"><a href="">Un Cover</a>
+                    <li class="Menu__Trademark__List__UnCover"><a href="category.jsp">Un Cover</a>
                         <ul class="List">
                             <img src="${pageContext.request.contextPath}/resource/assets/img/home/Logouncover.jpg" alt="" class="reponsive">
                             <li><a href="">T-SHIRT</a></li>
@@ -53,7 +54,7 @@ import="java.sql.*"
                             <li><a href="">SHORT & PANTS</a></li>
                         </ul>
                     </li>
-                    <li class="Menu__Trademark__List__DAVIES"><a href="">DAVIES</a>
+                    <li class="Menu__Trademark__List__DAVIES"><a href="category.jsp">DAVIES</a>
                         <ul class="List">
                             <img src="${pageContext.request.contextPath}/resource/assets/img/home/logodavies.jpg" alt="" class="reponsive">
                             <li><a href="">T-SHIRT</a></li>
@@ -101,8 +102,8 @@ import="java.sql.*"
                                 alt="avt" srcset=""> -->
                 <img class="js__memberimg" src="${pageContext.request.contextPath}/resource/assets/img/member/error/member.png" alt="avt" srcset=""> 
                 </div>
-                <div class="member__name">
-                    <span class="js__membername">Guest</span>
+                <div class="member__name" >
+                    <span class="js__membername" >${member}</span>
                 </div>
             </div>
 
@@ -111,23 +112,68 @@ import="java.sql.*"
             <li class="Other__item Other__search">
                 <input class="Other__search__input" placeholder="search" type="text">
                 <i class="fa fa-search"></i>
-
             </li>
             <!--user icon -->
             <li class="Other__item Other__User">          
-                <a class="fa fa-user js__icon--user"  href="${pageContext.request.contextPath}/member"></a>
-                <div class="js__icon--edit">        
-                        <a class="fas fa-user-cog" href="${pageContext.request.contextPath}/edit"></a> 
-                </div>
-                    
+                <a class="fa fa-user js__icon--user"  href="${pageContext.request.contextPath}/member"></a>                
             </li>
             <!--cart icon -->
-            <li class="Other__item Other__shoopping-bag">
-                <a class="fa fa-shopping-cart" href="${pageContext.request.contextPath}/cart"></a>
+            <li id="cart" class="Other__item Other__shoopping-bag">
+                <a class="fa fa-shopping-cart" aria-hidden="true"></a>
             </li>
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 style="color: black;" class="modal-title">Giỏ Hàng</h5>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="cart-row">
+                            <span style="color: black;" class="cart-item cart-header cart-column">Sản Phẩm</span>
+                            <span style="color: black;" class="cart-price cart-header cart-column">Giá</span>
+                            <span style="color: black;" class="cart-quantity cart-header cart-column">Số Lượng</span>
+                        </div>
+                        <div class="cart-items">
+                            <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+                            <c:forEach var="item" items="${cart.items}" >
+                                <div class="cart-row">
+                                    <div class="cart-item cart-column">
+                                        <img class="cart-item-image" src="${pageContext.request.contextPath}/resource/assets/img/product/${item.product.brand}/${item.product.code}" width="100" height="100">
+                                        <span id="cart-item" class="cart-item-title">${item.product.desc}</span>
+                                    </div>
+                                    <span class="cart-price cart-column">${item.product.price}</span>
+                                    <div class="cart-quantity cart-column">
+                                        <p class="cart-quantity-input">${item.quantity}</p>
+                                        
+                                        <form action="${pageContext.request.contextPath}/CartControLlers" method="POST" id="delete">
+                                            <input type="hidden" name="productID" 
+                                                   value="<c:out value='${item.product.code}'/>">
+                                            <input type="hidden" name="quantity" value="0">
+                                            <button id="delete" class="btn btn-danger" form="delete" type="submit">Xóa</button>
+                                        </form>
+                                    </div>
+                                </div>                
+                            </c:forEach>
+                        </div>
+                        <div class="cart-total">
+                            <strong style="color: black;" class="cart-total-title">Tổng Cộng:</strong>
+                            <span style="color: black;" class="cart-total-price">${price}</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <p style="color: black;" class="messRemove" id="messRemove">${messRemove}</p> -->
+                        <form action="${pageContext.request.contextPath}/products">
+                            <button style="background-color: black;"  type="submit" class="btn btn-primary order">Tiếp tục mua sắm</button>
+                        </form>
+                       <form action="${pageContext.request.contextPath}/checkOut">
+                        <button style="background-color: black;" type="submit" class="btn btn-primary order">Thanh Toán</button>
+                       </form>
+                        <button type="button" class="btn btn-secondary close-footer">Đóng</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
-
     <section id="Slide">
         <div class="row">
             <div class="row-1">
@@ -186,15 +232,15 @@ import="java.sql.*"
         <!-------------------footer---------------->
         <div class="footer-top">
             <li>
-                <a href="https://www.facebook.com/76storee"> <i class="fa fa-facebook-square" aria-hidden="true"></i></li>
+                <a href="https://www.facebook.com/76storee"> <i class="fa-brands fa-facebook" aria-hidden="true"></i></li>
             <li><a href="">Liên Hệ</a></li>
             <li><a href="">Tuyển Dụng</a></li>
             <li><a href="">Giới Thiệu</a></li>
             <li>
-                <a class="fa fa-instagram" href="https://www.instagram.com/hi_hungw/?fbclid=IwAR2rgxF_ygWB_qOWBVH2qe1bKdH2uPfFD3HdQ9lnuDyq_GX00t2HxIxbFJM"></a>
+                <a class="fa-brands fa-instagram" href="https://www.instagram.com/hi_hungw/?fbclid=IwAR2rgxF_ygWB_qOWBVH2qe1bKdH2uPfFD3HdQ9lnuDyq_GX00t2HxIxbFJM"></a>
             </li>
             <li>
-                <a class="fa fa-youtube" href=""></a>
+                <i class="fa-brands fa-youtube"></i>
             </li>
         </div>
         <div class="information">
@@ -206,46 +252,44 @@ import="java.sql.*"
         </div>
     </footer>
     <%-- <input type="hidden" class="JSON" name="JSON" value="${member.avt}"> --%>
-
-
-
-
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/js/controllerproduct.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/js/Modal.js"></script>
 <script>
-    const imgPosition = document.querySelectorAll(".aspect-ratio-169 a img")
-    const imgContainer = document.querySelector(".aspect-ratio-169")
-    const dotItem = document.querySelectorAll(".dot")
-    let imgNumber = imgPosition.length
-    index = 0
-        /*console.log(imgPosition)*/
-    imgPosition.forEach(function(${pageContext.request.contextPath}/resource/assets/img/home,index) {
-        ${pageContext.request.contextPath}/resource/assets/img/home.style.left = index * 100 + "%"
-        dotItem[index].addEventListener("click", function() {
-            slider(index)
-        })
+    const header=document.querySelector("header")
+    const imgPosition =document.querySelectorAll(".aspect-ratio-169 img") 
+    const imgContainer=document.querySelector(".aspect-ratio-169")
+    const dotItem=document.querySelectorAll(".dot")
+    let imgNumber=imgPosition.length
+    index=0
+    /*console.log(imgPosition)*/
+    imgPosition.forEach(function(image,index){
+       image.style.left=index*100+"%"
+       dotItem[index].addEventListener("click",function(){
+        slider(index)
+       })
     })
-
-    function imgSlide() {
+    function imgSlide(){
         index++;
         console.log(index)
-        if (index >= imgNumber) {
-            index = 0;
-        }
-        imgContainer.style.left = "-" + index * 100 + "%"
+       if(index>=imgNumber)
+       {
+           index=0;
+       }
+        imgContainer.style.left="-" +index*100+"%"
         slider(index)
-
+        
     }
-
-    function slider(index) {
-        imgContainer.style.left = "-" + index * 100 + "%"
-        const dotActive = document.querySelector('.active')
+    function slider(index){
+        imgContainer.style.left="-" +index*100+ "%"
+        const dotActive=document.querySelector('.active')
         dotActive.classList.remove("active")
         dotItem[index].classList.add("active")
     }
-    setInterval(imgSlide, 5000)
+    setInterval(imgSlide,5000)
 </script>
 <!-- NEW -->
-<script>
+<!-- <script>
     //container
     const memberAvt = document.querySelector(".member__avt");
     const memberName = document.querySelector(".member__name");
@@ -288,6 +332,6 @@ import="java.sql.*"
         hideName.style.display ="inline-block";
     }
 
-</script>
+</script> -->
 
 </html>

@@ -17,17 +17,16 @@ import="java.sql.*"
 
 <body>
     <div class="container rounded bg-white mt-5 mb-5">
-        <form id="form-user-edit" action="${pageContext.request.contextPath}/edit/confirm" method="POST">
+        <form id="form-user-edit" action="${pageContext.request.contextPath}/editVerify" method="POST">
         <input type="hidden" name="action" value="edit"/>
-        <input type="hidden" name="_id" value="${memberEdit.id}">
+        <input type="hidden" name="_id" value="${userEdit.id}">
             <div class="row">
                 <div class="col-md-3 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                         <div class="imgArea">
-                            <img class="js__img" src="${memberEdit.avt}" alt="IMAGE">
                         </div>
-                        <span class="font-weight-bold">${memberEdit.fullName}</span>
-                        <span class="text-black-50">${memberEdit.email}</span>
+                        <span class="font-weight-bold">${userEdit.firstName} ${userEdit.lastName}</span>
+                        <span class="text-black-50">${userEdit.email}</span>
                         <label class="lbFile" for="files">Update avatar</label>
                         <input id="files" type="file" style="visibility:hidden;" onchange="readURL(this)" accept="image/png, image/jpeg">
                     </div>
@@ -38,13 +37,12 @@ import="java.sql.*"
                             <h4 class="text-right">Profile Settings</h4>
                         </div>
                         <div class="row mt-2">
-                            <div class="col-md-6"><label class="labels">First Name</label><input  type="text" name="firstName" class="form-control"  value="${memberEdit.firstName}"></div>
-                            <div class="col-md-6"><label class="labels">Last Name</label><input type="text" name="lastName" class="form-control" value="${memberEdit.lastName}"></div>
-
+                            <div class="col-md-6"><label class="labels">First Name</label><input  type="text" name="firstName" class="form-control"  value="${userEdit.firstName}"></div>
+                            <div class="col-md-6"><label class="labels">Last Name</label><input type="text" name="lastName" class="form-control" value="${userEdit.lastName}"></div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-12"><label class="labels">Address</label><input type="text" name="contact" class="form-control" placeholder="Address" value="${memberEdit.contact}"></div>
-                            <div class="col-md-12"><label class="labels">Email</label><input type="text" name="email" class="form-control"  placeholder="Email" value="${memberEdit.email}"></div>
+                            <div class="col-md-12"><label class="labels">Address</label><input type="text" name="contact" class="form-control" placeholder="Address" value="${userEdit.contact}"></div>
+                            <div class="col-md-12"><label class="labels">Email</label><input type="text" name="email" class="form-control"  placeholder="Email" value="${userEdit.email}"></div>
                         </div>
                         <%-- <div class="mt-5 text-center"><button class="btn btn-primary profile-button" for="form-user-edit" type="submit">Save Profile</button></div> --%>
                     </div>

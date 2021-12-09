@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import com.k19.models.Users;
+import com.k19.DAO.UserDAO;
 import com.k19.models.member;
 import com.k19.models.memberJPA;
 import com.google.gson.Gson;
@@ -38,7 +40,7 @@ public class login extends HttpServlet {
         // remember
         String rem = req.getParameter("remember"); // tick - nontick
         // get info
-        String uname = req.getParameter("username");
+        String email = req.getParameter("email");
         String passwd = req.getParameter("password");
 
         String mess = null;
@@ -52,18 +54,18 @@ public class login extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/member/sign-in");
         } else if (action.equals("submit")) {
             // final member member = memberDAO.checkMember(uname, passwd);
-            final memberJPA member = memberJPADAO.checkMember(uname, passwd);
+            final Users member = UserDAO.checkUser(email, passwd);
 
             // check member
             if (member != null) {
                 HttpSession session = req.getSession();
                 // valid
                 // set session
-                session.setAttribute("username", uname);
+                session.setAttribute("email", email);
                 //
-                req.setAttribute("member", member);
+                session.setAttribute("member", member.getFirstName()+member.getLastName());
                 // create cookies
-                Cookie cookiea = new Cookie("usernameCookie", uname);
+                Cookie cookiea = new Cookie("usernameCookie", email);
                 cookiea.setMaxAge(60 * 60 * 24);
                 cookiea.setPath("/");
                 resp.addCookie(cookiea);
@@ -78,24 +80,24 @@ public class login extends HttpServlet {
 
                 mess = "Success Login";
                 // Get json
-                String jsonMember = new Gson().toJson(member);
+                // String jsonMember = new Gson().toJson(member);
 
-                session.setAttribute("memberJSON", jsonMember);
+                // session.setAttribute("memberJSON", jsonMember);
                 //
                 // change it to Home
-                String url = "/index.jsp";
+                String url = "/";
                 session.setAttribute("message", mess);
 
-                // getServletContext().getRequestDispatcher(url).forward((ServletRequest) req,
-                // (ServletResponse) resp);
-                resp.sendRedirect("/");
+                //  getServletContext().getRequestDispatcher(url).forward((ServletRequest) req,
+                //  (ServletResponse) resp);
+                resp.sendRedirect(url);
             } else {
                 // invalid password
                 // try to get latest data
                 HttpSession session = req.getSession();
                 try {
-                    if (memberJPADAO.selectMember(uname) != null) {
-                        mess = "Wrong password, You are " + uname + " ?";
+                    if (memberJPADAO.selectMember(email) != null) {
+                        mess = "Wrong password, You are " + email + " ?";
                     } else {
                         mess = "We can not define you on my server, You are new ?";
                     }

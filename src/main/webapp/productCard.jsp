@@ -5,14 +5,10 @@ import="java.sql.*"
 %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/fonts/icon_font/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/flaviusmatis-simplePagination.js-da97104/tests/lib/jasmine-1.3.1/jasmine.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/flaviusmatis-simplePagination.js-da97104/tests/lib/jasmine-1.3.1/jasmine.js"></script>
@@ -23,13 +19,12 @@ import="java.sql.*"
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet"  type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/layout/categoriess.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/oneshot/home.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/layout/productCard.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/assets/css/layout/cart.css">
+    <title>SARK</title>
 </head>
-
-<body onload="MyOnLoad()" >
-    <!-- <div class="mock-header"></div> -->
-    <!-- Begin Header -->
-    <header class="Header" onload='OnLoad()'>
+<body>
+    <header class="Header">
         <div class="Logo">
             <a href="#"> <img src="${pageContext.request.contextPath}/resource/assets/img/home/logo_200x200.png" height="150" width="150" alt="Amazing" class="reponsive"></a>
         </div>
@@ -98,7 +93,7 @@ import="java.sql.*"
                     </li>
                 </ul>
             </li>
-            <li class="Menu__Contact"><a href="">${member}</a></li>
+            <li class="Menu__Contact"><a href="">CONTACT</a></li>
         </div>
             <input type="hidden" class="JSON" name="JSON" value='${sessionScope.memberJSON}'>
         <div class="Other">
@@ -134,6 +129,7 @@ import="java.sql.*"
             <div id="myModal" class="modal">
                 <div class="modal-content">
                     <div class="modal-header">
+                       
                         <h5 style="color: black;" class="modal-title">Giỏ Hàng</h5>
                         <span class="close">&times;</span>
                     </div>
@@ -153,9 +149,8 @@ import="java.sql.*"
                                     </div>
                                     <span class="cart-price cart-column">${item.product.price}</span>
                                     <div class="cart-quantity cart-column">
-                                        <p class="cart-quantity-input">${item.quantity}</p>
-                                        
-                                        <form action="${pageContext.request.contextPath}/CartControLlers" method="POST" id="delete">
+                                        <p class="cart-quantity-input">${item.quantity}</p>  
+                                        <form action="${pageContext.request.contextPath}/removeProduct" method="POST" id="delete">
                                             <input type="hidden" name="productID" 
                                                    value="<c:out value='${item.product.code}'/>">
                                             <input type="hidden" name="quantity" value="0">
@@ -167,13 +162,13 @@ import="java.sql.*"
                         </div>
                         <div class="cart-total">
                             <strong style="color: black;" class="cart-total-title">Tổng Cộng:</strong>
-                            <span style="color: black;" class="cart-total-price">${price}</span>
+                            <span id="cart-total-price" style="color: black;" class="cart-total-price">${price}</span>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <!-- <p style="color: black;" class="messRemove" id="messRemove">${messRemove}</p> -->
+                        <p style="color: black;" class="messRemove" id="messRemove">${messRemove}</p>
                         <form action="${pageContext.request.contextPath}/products">
-                            <button style="background-color: black;"  type="submit" class="btn btn-primary order">Tiếp tục mua sắm</button>
+                            <button style="background-color: black;" type="submit" class="btn btn-primary order">Tiếp tục mua sắm</button>
                         </form>
                        <form action="${pageContext.request.contextPath}/checkOut">
                         <button style="background-color: black;" type="submit" class="btn btn-primary order">Thanh Toán</button>
@@ -184,55 +179,38 @@ import="java.sql.*"
             </div>
         </div>
     </header>
-    <section class="category">
-        <div class="category-right ">
-            <div class="category-right-top row">
-                <div class="category-right-top-item">
-                    <p  id="show-product">${show}</p>
-                </div>
-                <div  class="category-right-top-item">
-                    <select size="1" name="" id="gender" onchange="genderChanged(this)">
-                        <option value="" id="">Lọc</option>
-                        <option style="color: black;" value="all" id="all">Tất cả sản phẩm</option>
-                        <option style="color: black;" value="T-SHIRT" id="T-SHIRT">T-Shirt</option>
-                        <option style="color: black;" value="SHIRT" id="SHIRT">SHIRT</a></option>
-                    </select>
-                </div>
-                <div  class="category-right-top-item">
-                    <select size="1" name="" id="" onchange="genderChangedSort(this)">
-                        <option value="" >Sắp xếp </option>
-                        <option style="color: black;" value="DESC" >Cao đến thấp</option>
-                        <option style="color: black;" value="ASC" >Thấp đến cao</option>
-                    </select>
-                </div>
-            </div>  
+    <section class="product">
+        <div class="card">
+          <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+         <img src="${pageContext.request.contextPath}/resource/assets/img/product/${product.brand}/${product.code}" alt="${product.desc}" style="width:100%">
+         <p style="color: black;">${product.desc}</p>
+         <p><span class="price" style="color: black;">${product.price}<sub style="color: black;">đ</sub></span></p></p>
+         <!-- <p style="color:black;" class="price"><span style="color: black;">${product.price}<sub>đ</sub></span></p> -->
+         <form action="${pageContext.request.contextPath}/addProduct" id="cartcontroller" method="POST">
+           <div class="buttons_added">
+               <!-- <input onclick="var result = document.getElementById('quantity'); var qty = result.value; if( !isNaN(qty) &amp; qty > 1 ) result.value--;return false;" type='button' value='-' />
+               <button onclick='MyClickMinus()' class="minus">-</button>
+               <p class="count" id="count">1</p>
+               <button onclick='MyClickPlus()' class="plus">+</button> -->
+               <input style="color: black;" type="hidden" name="productID" 
+               value="<c:out value='${product.code}'/>">
+               <input style="color: black;" class="minus" onclick="var result = document.getElementById('quantity'); var qty = result.value; if( !isNaN(qty) &amp; qty > 1 ) result.value--;return false;" type='button' value='-' />
+               <!-- <p class="count" id="count">1</p> -->
+               <input style="color: black;" class="quantity" id='quantity' min='1' name='quantity' type='text'  value='1' />
+               <input style="color: black;" class="plus" onclick="var result = document.getElementById('quantity'); var qty = result.value; if( !isNaN(qty)) result.value++;return false;" type='button' value='+' />
+               <!-- <button onclick='MyClickPlus()' class="plus">+</button> -->
+           </div>
+           <div class="cardproduct">
+             <p style="color: black;" id="messAdd">${messAdd}</p>
+                <p><button type="submit" form="cartcontroller">Thêm vào giỏ hàng</button></p>
+                <br>
+           </div>
+         </form>
+         
+         <li id="cart"><button onclick='MyOnClick()' id="cart">Xem giỏ hàng</button></li>
+         
         </div>
-        <ul class="products">
-            <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-                <c:forEach var="product" items="${products}">
-                    <li>
-                        <div class="product-item">
-                            <div class="product-top">
-                                <a href="${pageContext.request.contextPath}/Product?productID=${product.code}" class="product-thumb">
-                                    <img src="${pageContext.request.contextPath}/resource/assets/img/product/${product.brand}/${product.code}">
-                                </a>
-                                <form>
-                                <a id="buy" href="${pageContext.request.contextPath}/Product?productID=${product.code}" class="buy-now">MUA NGAY</a>
-                            </div>
-                        </div>
-                       <div class="product-info">
-                           <a href=""class="product-cat">${product.classify}</a>
-                           <a href="" class="product-name">${product.desc} </a>
-                           <div class="product-price"><span>${product.price}<sub>đ</sub></span></div>
-                       </div>
-                    </li>  
-                </c:forEach>
-        </ul> 
-        
     </section>
-    <div id="pagination-container"></div>
-    <!-------------------app---------------->
-    <!-------------------footer---------------->
     <footer>
         <section class="app-container">
             <p>Tải ứng dụng SARK</p>
@@ -268,59 +246,10 @@ import="java.sql.*"
             <div>@SARK</div>
         </div>
     </footer>   
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/js/controllerproduct.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/js/Modal.js"></script>
+   
+ </div>
 </body>
-    <script
-        src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
-        <script
-        src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous">
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/flaviusmatis-simplePagination.js-da97104/jquery.simplePagination.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/flaviusmatis-simplePagination.js-da97104/tests/spec/SpecHelper.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/flaviusmatis-simplePagination.js-da97104/tests/spec/SimplePaginationSpec.js"></script>
-    <script>
-        $(function() {
-        var items = $(".products li");
-            var numItems = items.length;
-            var perPage = 8;
-
-            items.slice(perPage).hide();
-
-            $('#pagination-container').pagination({
-                items: numItems,
-                itemsOnPage: perPage,
-                prevText: "&laquo;",
-                nextText: "&raquo;",
-                onPageClick: function (pageNumber) {
-                    var showFrom = perPage * (pageNumber - 1);
-                    var showTo = showFrom + perPage;
-                    items.hide().slice(showFrom, showTo).show();
-                }
-            });
-            //$.pagination(container, options);
-
-            container.addHook('beforeInit', function () {
-            window.console && console.log('beforeInit...');
-            });
-            container.pagination(options);
-
-            container.addHook('beforePageOnClick', function () {
-            window.console && console.log('beforePageOnClick...');
-            //return false
-            });
-        })
-    </script>
-    
-    <!-- <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/js/pagination.js"></script> -->
-    <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/js/Redirect.js"></script>
-    <!-- <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/js/controllerproduct.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/js/Modal.js"></script> -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/js/controllerproduct.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/assets/js/Modal.js"></script>
 
 </html>

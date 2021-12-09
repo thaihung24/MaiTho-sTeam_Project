@@ -26,8 +26,8 @@ import="java.sql.*"
                 </div>
 
                 <div class="container">
-                    <label for="uname">Username</label>
-                    <input id="uname" type="text" placeholder="Enter Username" name="username" required>
+                    <label for="email">Email</label>
+                    <input id="email" type="text" placeholder="Enter Email" name="email" required>
 
                     <label for="psw"><b>Password</b></label>
                     <input id="psw" type="password" placeholder="Enter Password" name="password" title="Password at least 8 characters avoid special characters"  required>

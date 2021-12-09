@@ -38,7 +38,6 @@ public class productJPADAO {
             em.close();
         }
     }
-
     // select single
     public static productJPA selectProduct(final String productCode) throws ClassNotFoundException, SQLException {
         EntityManagerFactory emf = null;
@@ -59,37 +58,43 @@ public class productJPADAO {
         }
         return product;
     }
-    //  select all
-    public static List<productJPA> selectProducts() {
+    //  select 
+    public static List<productJPA> selectProducts(String classify,String sort) {
         EntityManager em = dbUtil.getEMF().createEntityManager();
-        String qString = "SELECT u from productJPA u";
-        TypedQuery<productJPA> q = em.createQuery(qString, productJPA.class);
-        List<productJPA> products;
-        try {
-            products = q.getResultList();
-            if (products == null || products.isEmpty())
-                products = null;
-        } finally {
-            em.close();
+        String qString = "SELECT u from productJPA u ";
+        if(classify!=null)
+        {
+            qString+="WHERE u.classify = :classify ";
         }
-        return products;
-    }
-    //Filter
-    public static List<productJPA> selectGroupProducts(String classify) {
-        EntityManager em = dbUtil.getEMF().createEntityManager();
-        String qString = "SELECT u from productJPA u " +
-                "WHERE u.classify = :classify";
-        TypedQuery<productJPA> q = em.createQuery(qString, productJPA.class);
-        q.setParameter("classify", classify);
-        List<productJPA> products;
-        try {
-            products = q.getResultList();
-            if (products == null || products.isEmpty())
-                products = null;
-        } finally {
-            em.close();
+        if(sort!=null)
+        {
+            qString+="ORDER BY u.price "+sort;
         }
-        return products;
+        if(classify==null)
+        {
+            TypedQuery<productJPA> q = em.createQuery(qString, productJPA.class);
+            List<productJPA> products;
+            try {
+                products = q.getResultList();
+                if (products == null || products.isEmpty())
+                    products = null;
+            } finally {
+                em.close();
+            }
+            return products;
+        }
+        else{
+            TypedQuery<productJPA> q = em.createQuery(qString, productJPA.class);
+            q.setParameter("classify", classify);
+            List<productJPA> products;
+            try {
+                products = q.getResultList();
+                if (products == null || products.isEmpty())
+                    products = null;
+            } finally {
+                em.close();
+            }
+            return products;
+        }
     }
-
 }

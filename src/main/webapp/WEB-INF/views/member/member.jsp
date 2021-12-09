@@ -28,7 +28,6 @@ import="java.sql.*"
     <section class="slider_section">
         <div class="carousel-inner">
             <div class="carousel-item active">
-
                 <div class="container-fluid padding_dd">
                     <div class="carousel-caption">
                         <div class="row">

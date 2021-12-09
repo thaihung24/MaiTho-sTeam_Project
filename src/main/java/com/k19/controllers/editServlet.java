@@ -3,6 +3,7 @@ package com.k19.controllers;
 import java.io.IOException;
 
 import javax.persistence.Entity;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -13,77 +14,133 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.k19.DAO.UserDAO;
 import com.k19.DAO.memberJPADAO;
 import com.k19.models.memberJPA;
+import com.k19.models.Users;
+import com.k19.utils.EmailUtility;
 
-@WebServlet(urlPatterns = { "/edit/confirm" })
+@WebServlet(urlPatterns = { "/editVerify" })
 public class editServlet extends HttpServlet {
-    memberJPADAO mjdao;
+    private static final long serialVersionUID = 1L;
+    private String host;
+    private String port;
+    private String username;
+    private String pass;
+    private UserDAO userdao;
 
     // init
+    public void init() {
+        // reads SMTP server setting from web.xml file
+        ServletContext context = getServletContext();
+        host = context.getInitParameter("host");
+        port = context.getInitParameter("port");
+        username = context.getInitParameter("username");
+        pass = context.getInitParameter("pass");
+    }     
     public editServlet() {
-        this.mjdao = new memberJPADAO();
+        this.userdao = new UserDAO();
     }
 
     // [GET] /edit/confirm
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
     }
 
     // [POST] /edit/confirm
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       
+        HttpSession session = request.getSession();
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         // get action
-        String action = req.getParameter("action");
-        int _id = Integer.parseInt(req.getParameter("_id"));
+        String action = request.getParameter("action");
+        int _id = Integer.parseInt(request.getParameter("_id"));
         // get entity need edit
         // error do thang session return null
         // memberJPA memberEdit = (memberJPA) session.getAttribute("memberEdit");
         System.out.println(session.getAttribute("memberEdit"));
-        memberJPA memberEdit = this.mjdao.selectMemberbyId(_id);
+        // memberJPA memberEdit = this.mjdao.selectMemberbyId(_id);
+        Users userEdit = UserDAO.selectUserById(_id);
         //
-        if (memberEdit != null) {
+        if (userEdit != null) {
+            String url="";
             if (action.equals(null)) {
                 action = "cancel";
             }
             if (action.equals("edit")) {
                 // get data
-                final String firstName = req.getParameter("firstName");
-                final String lastName = req.getParameter("lastName");
-                final String fullName = firstName + " " + lastName;
-                final String email = req.getParameter("email");
-                final String contact = req.getParameter("contact");
-                final String gentle = req.getParameter("gentle");
-                memberEdit.setFirstName(firstName);
-                memberEdit.setLastName(lastName);
-                memberEdit.setFullName(fullName);
-                memberEdit.setEmail(email);
-                memberEdit.setContact(contact);
-                memberEdit.setGentle(gentle);
+                String firstName=request.getParameter("firstName");
+                String lastName=request.getParameter("lastName");
+                String gentle=request.getParameter("gentle");
+                String email = request.getParameter("email");
+                // String password = request.getParameter("password");
+                String contact=request.getParameter("contact");
+                String resultMessage = "";
+                String code = EmailUtility.getRandom();
+                boolean test;
                 try {
-                    System.out.println("Update---------------");
-                    this.mjdao.updateMember(memberEdit);
-                    System.out.println("merge---------------");
-
-                    req.setAttribute("username", (memberJPA) memberEdit);
-                    System.out.println("updated------------");
-                    // Get json
-                    String jsonMember = new Gson().toJson(memberEdit);
-                    session.setAttribute("memberJSON", jsonMember);
-
-                    getServletContext().getRequestDispatcher("/index.jsp").forward((ServletRequest) req,
-                            (ServletResponse) resp);
-                } catch (NullPointerException e) {
-                    e.printStackTrace();
-                } finally {
-                    // destroy old edit info
-                    session.invalidate();
+                    userEdit.setCode(code);
+                    test = EmailUtility.sendEmail(host, port, username, pass, email, "Email Verification",
+                                 "Registered successfully.Please verify your account using this code: " + userEdit.getCode());
+                   
+                } catch (Exception e) {
+                    //TODO: handle exception
+                    test=false;
                 }
+                if(test)
+                {
+                    url ="/verifyEdit.jsp";
+                    userEdit.setEmail(email);
+                    userEdit.setFirstName(firstName);
+                    userEdit.setLastName(lastName);
+                    userEdit.setContact(contact);
+                    userEdit.setGentle(gentle);
+                    resultMessage = "We already send a verification  code to your email.";
+                }
+                else{
+                    resultMessage = "There were an error. Please try again!";
+                    
+                    url="/member/edit.jsp";
+                }
+                session.setAttribute("userEdit", userEdit);
+                request.setAttribute("mess", resultMessage);
+                getServletContext().getRequestDispatcher("/WEB-INF/views" + url).forward((ServletRequest) request,
+                (ServletResponse) response);
+                // try {
+                //     session.setAttribute("userEdit", userEdit);
+                //     test = EmailUtility.sendEmail(host, port, username, pass, email, "Email Verification",
+                //                 "Registered successfully.Please verify your account using this code: " + .getCode());
+
+                //     // System.out.println("Update---------------");
+                //     // this.userdao.updateUser(userEdit);
+                //     // System.out.println("merge---------------");
+
+                //     // // request.setAttribute("username", (Users) userEdit);
+                //     // session.setAttribute("member", userEdit.getFirstName()+" "+userEdit.getLastName());
+                //     // System.out.println("updated------------");
+                //     // Get json
+                //     // String jsonMember = new Gson().toJson(userEdit);
+                //     // session.setAttribute("memberJSON", jsonMember);
+
+                //     getServletContext().getRequestDispatcher("/index.jsp").forward((ServletRequest) request,
+                //             (ServletResponse) response);
+                // } catch (NullPointerException e) {
+                //     e.printStackTrace();
+                //     getServletContext().getRequestDispatcher("/index.jsp").forward((ServletRequest) request,
+                //     (ServletResponse) response);
+                // } finally {
+                //     // destroy old edit info
+                //     session.invalidate();
+                // }
             } else if (action.equals("cancel")) {
-                resp.sendRedirect(req.getContextPath() + "/");
+                response.sendRedirect(request.getContextPath() + "/");
             }
         } else {
             System.out.println("Select member by id method return null");
+            getServletContext().getRequestDispatcher("/WEB-INF/views/member/edit.jsp").forward((ServletRequest) request,
+            (ServletResponse) response);
+            
         }
     }
 }
