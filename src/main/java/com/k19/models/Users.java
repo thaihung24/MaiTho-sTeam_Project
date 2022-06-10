@@ -8,6 +8,7 @@ import javax.persistence.Table;
 
 import com.k19.controllers.register;
 
+
 import net.bytebuddy.description.annotation.AnnotationDescription.Latent;
 
 @Entity
@@ -18,10 +19,11 @@ public class Users {
 	@Column(name="id")
     private int id;
 	private String code;
+	private String email;
 	private String firstName;
 	private String lastName;
 	private String gentle;
-	private String email;
+	private String avt;
 	private String password;
 	private String contact;
     public Users() {
@@ -33,6 +35,7 @@ public class Users {
 		lastName="";
 		contact="";
 		gentle="";
+		avt="";
 	}
 	
 	public Users(String code,String firstName,String lastName,String gentle, String email, String password,String contact) {
@@ -44,6 +47,7 @@ public class Users {
 		this.email = email;
 		this.password = password;
 		this.contact=contact;
+		
 	}
 	public void setId(int id) {
 		this.id = id;

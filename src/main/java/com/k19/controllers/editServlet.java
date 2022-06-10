@@ -107,32 +107,7 @@ public class editServlet extends HttpServlet {
                 request.setAttribute("mess", resultMessage);
                 getServletContext().getRequestDispatcher("/WEB-INF/views" + url).forward((ServletRequest) request,
                 (ServletResponse) response);
-                // try {
-                //     session.setAttribute("userEdit", userEdit);
-                //     test = EmailUtility.sendEmail(host, port, username, pass, email, "Email Verification",
-                //                 "Registered successfully.Please verify your account using this code: " + .getCode());
-
-                //     // System.out.println("Update---------------");
-                //     // this.userdao.updateUser(userEdit);
-                //     // System.out.println("merge---------------");
-
-                //     // // request.setAttribute("username", (Users) userEdit);
-                //     // session.setAttribute("member", userEdit.getFirstName()+" "+userEdit.getLastName());
-                //     // System.out.println("updated------------");
-                //     // Get json
-                //     // String jsonMember = new Gson().toJson(userEdit);
-                //     // session.setAttribute("memberJSON", jsonMember);
-
-                //     getServletContext().getRequestDispatcher("/index.jsp").forward((ServletRequest) request,
-                //             (ServletResponse) response);
-                // } catch (NullPointerException e) {
-                //     e.printStackTrace();
-                //     getServletContext().getRequestDispatcher("/index.jsp").forward((ServletRequest) request,
-                //     (ServletResponse) response);
-                // } finally {
-                //     // destroy old edit info
-                //     session.invalidate();
-                // }
+                
             } else if (action.equals("cancel")) {
                 response.sendRedirect(request.getContextPath() + "/");
             }

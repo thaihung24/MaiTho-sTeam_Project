@@ -179,10 +179,10 @@ import="java.sql.*"
             <div class="row-1">
                 <div class="row-1-col-1">
                     <div class="aspect-ratio-169">
-                        <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/badhabit/slideshow_1.jpg" alt=""></a>
-                        <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/slide/slide2.jpg" alt=""></a>
-                        <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/badhabit/slideshow_3.jpg" alt=""></a>
-                        <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/bobui/slideshow2.jpg" alt=""></a>
+                        <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/slide/slideslide2.jpg" alt=""></a>
+                        <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/slide/slideslide4.jpg" alt=""></a>
+                        <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/slide/slideslide2.jpg" alt=""></a>
+                        <a href=""> <img src="${pageContext.request.contextPath}/resource/assets/img/home/slide/slideslide4.jpg" alt=""></a>
                     </div>
                     <div class="dot-container">
                         <div class="dot active"></div>
@@ -194,22 +194,22 @@ import="java.sql.*"
             </div>
             <div class="row-2">
                 <div class="row-2-item">
-                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/badhabit/slideshow_1.jpg" alt="" class="row-2-item"></a>
+                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/slide/slideslide2.jpg" alt="" class="row-2-item"></a>
                 </div>
                 <div class="row-2-item">
-                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/bobui/sp1.PNG" alt="" class="row-2-item"></a>
+                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/slide/slideslide6.jpg" alt="" class="row-2-item"></a>
                 </div>
                 <div class="row-2-item">
-                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/bobui/sp2.PNG" alt="" class="row-2-item"></a>
+                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/slide/slideslide5.jpg" alt="" class="row-2-item"></a>
                 </div>
                 <div class="row-2-item">
-                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/dirtycoin/sp1.PNG" alt="" class="row-2-item"></a>
+                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/slide/slideslide6.jpg" alt="" class="row-2-item"></a>
                 </div>
                 <div class="row-2-item">
-                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/dirtycoin/sp2.PNG" alt="" class="row-2-item"></a>
+                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/slide/slideslide5.jpg" alt="" class="row-2-item"></a>
                 </div>
                 <div class="row-2-item">
-                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/bobui/slideshow2.jpg" alt="" class="row-2-item"></a>
+                    <a href="products?action=display_products"><img src="${pageContext.request.contextPath}/resource/assets/img/home/slide/slideslide4.jpg" alt="" class="row-2-item"></a>
                 </div>
             </div>
             <div class="row-3"></div>

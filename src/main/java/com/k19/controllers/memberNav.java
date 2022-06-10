@@ -30,7 +30,7 @@ public class memberNav extends HttpServlet {
         // tomcat path : host/webapp/path
         // tomcat path : host/path
         String temp = req.getRequestURI().toString();
-        String slug = temp.substring(8, temp.length());// heroku 8 , tomcat 15
+        String slug = temp.substring(15, temp.length());// heroku 8 , tomcat 15
         // heroku
         // String path = req.getPathInfo();
         // ----------------------------------------
@@ -45,7 +45,6 @@ public class memberNav extends HttpServlet {
             Cookie[] allc = req.getCookies();
             // get last value
             String c = cookieUtil.getCookieValue(allc, "usernameCookie");
-
             // first time
             if (c.equals("") || c.equals(null)) {
                 url = "/WEB-INF/views/login.jsp";
@@ -59,7 +58,6 @@ public class memberNav extends HttpServlet {
             }
 
         }
-
         // ----------------------------------------
         // [GET] /member/sign-up
         else if (slug.equals("sign-up")) {

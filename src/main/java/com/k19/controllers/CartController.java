@@ -31,7 +31,7 @@ public class CartController  extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
          
         String temp = request.getRequestURI().toString();
-        String slug = temp.substring(1, temp.length());// heroku 1 , tomcat 8
+        String slug = temp.substring(8, temp.length());// heroku 1 , tomcat 8
         System.out.println("------------------------------"+slug+"----------------------------");
         if(slug.equals("Product")){
             ServletContext sc=getServletContext();

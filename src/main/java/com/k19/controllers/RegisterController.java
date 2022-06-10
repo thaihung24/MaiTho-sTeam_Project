@@ -52,8 +52,7 @@ public class RegisterController extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	     // reads form fields
-         System.out.println("Start register---------------------------------");
-
+        System.out.println("Start register---------------------------------");
         String action = request.getParameter("action");
         String url = null;
         if (action == null) {

@@ -28,6 +28,7 @@ public class ProductsServlet extends HttpServlet {
             action = "display_products"; // default action
         }
         // perform action and set URL to appropriate page
+        
         if (action.equals("display_products")) {
             // get list of products
             List<productJPA> products = productJPADAO.selectProducts(null,null);
